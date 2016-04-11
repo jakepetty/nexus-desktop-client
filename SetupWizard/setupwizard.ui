@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SetupWizard</class>
+ <widget class="QDialog" name="SetupWizard">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>632</width>
+    <height>318</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>632</width>
+    <height>318</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>632</width>
+    <height>318</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Setup Wizard</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../nexus.qrc">
+    <normaloff>:/images/favicon.png</normaloff>:/images/favicon.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">* {
+	color:#ddd;
+	outline: none;
+	font-size:11px Arial;
+}
+
+QTabWidget #tab,
+QTabWidget #tab_2,
+QTabWidget #tab_3,
+QTabWidget #tab_4{
+    background: #323947;
+}
+
+QTabWidget::pane {
+    border: none;
+}
+
+QTabBar::tab:selected {
+    background-color: #323947;
+}
+
+QTabWidget::tab-bar {
+    background-color: #323947;
+}
+
+QTabBar::tab:hover:selected {
+    background-color: #323947;
+}
+
+QTabBar::tab:hover {
+    background-color: #242933;
+}
+
+QTabBar::tab {
+    font-weight: bold;
+    background-color: #15181f;
+    border: none;
+    min-width: 10em;
+    padding: 10px 14px;
+    color: #ffffff;
+}
+
+
+
+QPushButton {
+    background: #2574ab;
+    border-radius: 2px;
+	padding: 3px 5px 2px;
+    border: none;
+    min-width: 100px;
+    color: #ffffff;
+}
+
+QPushButton::hover {
+    background: #2b85c4;
+}
+
+QPushButton::pressed {
+    background: #206291;
+}
+
+QPushButton:disabled {
+    background-color: #1c2029;
+    color: #46474a;
+}</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="tabPosition">
+      <enum>QTabWidget::South</enum>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <attribute name="title">
+       <string>Detect Star Trek Online</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="1" column="0" alignment="Qt::AlignBottom">
+        <widget class="QLabel" name="label_3">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border:1px solid #d9534f;
+border-radius:2px;
+background:#d9534f;
+padding:10px 12px 9px;
+color:#fff</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600&quot;&gt;Please Launch Star Trek Online&lt;br&gt;&lt;small&gt;Then ALT + Tab back to this window&lt;/small&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" alignment="Qt::AlignTop">
+        <widget class="QLabel" name="label_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border:1px solid #40495c;
+border-radius:2px;
+padding:10px 12px 9px;
+color:#ccc</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p style=&quot;line-height:20px;&quot;&gt;&lt;span style=&quot;font-weight:bold;color:#fff&quot;&gt;Detection of the Star Trek Online Install Directory.&lt;/span&gt; This process locates where Star Trek Online is installed so you don't have to. This process not only makes it easier for the user, it also ensures the location is accurate. Your install directory is required in order to process &lt;span style=&quot; font-weight:600;color:#fff;&quot;&gt;Fleet Rosters&lt;/span&gt;, &lt;span style=&quot; font-weight:600;color:#fff;&quot;&gt;Combat Logs&lt;/span&gt; and &lt;span style=&quot; font-weight:600;color:#fff;&quot;&gt;Screenshots&lt;/span&gt;. Without these things our service will be of no use to you.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <attribute name="title">
+       <string>Bind Handles</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <item row="1" column="0" alignment="Qt::AlignBottom">
+        <widget class="QPushButton" name="bindHandles">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>110</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Choose Your Handles</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" alignment="Qt::AlignTop">
+        <widget class="QLabel" name="label">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border:1px solid #40495c;
+border-radius:2px;
+padding:10px 12px 9px;
+color:#ccc</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p style=&quot;line-height:20px&quot;&gt;
+&lt;span style=&quot;color:#fff;font-weight:bold;&quot;&gt;You must bind your handles to your STO-Nexus account.&lt;/span&gt; This process links your handles and characters to your account so you can manage all data pertaining to them. This process also allows you to receive email notifications when someone uploads any combat logs containing to any of your characters. You can set privacy options for your characters and handles on our website after you complete this Setup Wizard.
+&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <attribute name="title">
+       <string>Submit Fleets</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="1" column="0" alignment="Qt::AlignBottom">
+        <widget class="QFrame" name="frame_4">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="spacing">
+           <number>5</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="selectFleets">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>110</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Select Fleet Roster(s)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="skipFleets">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>110</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Setup Fleet Later</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border:1px solid #40495c;
+border-radius:2px;
+padding:10px 12px 9px;
+color:#ccc</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+&lt;p style=&quot;line-height:20px&quot;&gt;
+&lt;span style=&quot;font-weight:bold;color:#fff&quot;&gt;As of now, your characters are just names without any data.&lt;/span&gt; In order to populate the missing data (Career, Faction, Level and Fleet) you need to submit a Fleet Roster.
+&lt;/p&gt;
+&lt;p style=&quot;line-height:20px&quot;&gt;
+Don't worry about privacy, fleets are only accessable to those who are in them by default. Outsiders will only be able to view statistical data such as how many people are in the fleet and how active the fleet is. You can change fleet privacy options on our website after you complete this Setup Wizard.
+&lt;/p&gt;
+&lt;p style=&quot;line-height:20px&quot;&gt;
+In order to obtain a fleet roster you must open the &lt;span style=&quot; font-weight:600;color:#fff&quot;&gt;Fleet Window&lt;/span&gt; in-game, click the &lt;span style=&quot; font-weight:600;color:#fff;&quot;&gt;Roster Tab&lt;/span&gt; and finally click the &lt;span style=&quot; font-weight:600;color:#fff&quot;&gt;Export Button&lt;/span&gt;.
+&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_4">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <attribute name="title">
+       <string>Finish</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0" alignment="Qt::AlignTop">
+        <widget class="QLabel" name="label_6">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border:1px solid #40495c;
+border-radius:2px;
+padding:10px 12px 9px;
+color:#ccc</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+&lt;p style=&quot;line-height:20px&quot;&gt;
+&lt;span style=&quot;color:#fff;font-weight:bold&quot;&gt;That's everything!&lt;/span&gt; Your account has been set up successfully. You may now use our &lt;a href=&quot;https://sto-nexus.com&quot; style=&quot;color:#24dba1&quot;&gt;Website&lt;/a&gt; and our Desktop Client to their fullest extent. Enjoy!
+&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="scaledContents">
+          <bool>false</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="continueBtn">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>110</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Click here to finish the Setup Wizard</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../nexus.qrc"/>
+ </resources>
+ <connections/>
+</ui>

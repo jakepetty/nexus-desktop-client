@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SetupWizard</class>
+ <widget class="QMainWindow" name="SetupWizard">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>474</width>
+    <height>275</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>474</width>
+    <height>238</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>474</width>
+    <height>16777215</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Setup Wizard</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../nexus.qrc">
+    <normaloff>:/images/favicon.ico</normaloff>:/images/favicon.ico</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">* {
+	outline: none;
+	font-size:11px;
+}
+
+QMainWindow{
+	background:#fff
+}
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTabWidget QWidget {
+    background: #fff;
+}
+QTabWidget::pane {
+    background-color: #ffffff;
+	border:none;
+}
+QTabBar::tab:selected {
+    background-color: #fff;
+	color:#3b4354;
+}
+QTabWidget::tab-bar {
+    background-color: #3b4354;
+}
+
+ QTabBar::tab:hover:selected{
+    background-color: #fff;
+	color:#3b4354;
+}
+ QTabBar::tab:disabled{
+    background-color: #fff;
+	color:#eee;
+}
+ QTabBar::tab:hover{
+	color:#fff;
+	 background-color: #313745;
+}
+QTabBar::tab {
+	font-weight:bold;
+	background-color: #3b4354;
+	border:none;
+	min-width:10em; 
+	padding: 10px 14px;
+	color: #ddd;
+}
+
+
+QTabWidget QPushButton {
+	border:none;
+	font-weight:bold;
+	height:38px;
+	text-transform: uppercase;
+	background-color:#259dab;
+	color:#fff;
+	border-radius:2px
+}
+
+QTabWidget QPushButton:hover{
+	background-color:#208a96;
+}
+QTabWidget QPushButton:pressed{
+	background-color:#1f828e;
+}
+QTabWidget QPushButton:disabled{
+	background-color:#dff0f2;
+}</string>
+      </property>
+      <property name="currentIndex">
+       <number>2</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Detect Star Trek Online</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <widget class="QFrame" name="frame_2">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>&lt;p style=&quot;line-height:20px&quot;&gt;This proccess detects where Star Trek Online is installed so you don't have to enter the location manually. This process not only makes it easier for the user but also ensures the location is accurate. Your install directory is required in order to proccess Fleet Rosters, Combat Logs and Screenshots without these things our service will be of no use to you.&lt;/p&gt;</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;text-decoration:blink&quot;&gt;Please Launch Star Trek Online&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <attribute name="title">
+        <string>Bind Handles</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p style=&quot;line-height:20px&quot;&gt;Now that your Star Trek Online directory has been located it's time to bind your handles to your account. This step is needed in order to manage data on our website relevent to your characters. Other members on our site will be able to see your characters names and handles but will not be able to see detailed information pertaining to them unless you specifically allow others to do so through our privacy settings located on our website.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="bindHandles">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>Select Handles</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <attribute name="title">
+        <string>Submit Fleets</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="1" column="0">
+         <widget class="QPushButton" name="selectFleets">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Select Fleet Rosters</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p style=&quot;line-height:20px&quot;&gt;As of now your characters are just names without any data. In order to populate the missing data (Career, Faction and Fleet) we require you to submit a roster of each fleet your characters are in. Each fleet submitted will only be accessable to members who are apart of the fleet. Outsiders will not be able to view sensitive materials such as a complete fleet roster including names and handles. In order to obtain a fleet roster you must go into the game and open &lt;span style=&quot; font-weight:600;&quot;&gt;Fleet Window&lt;/span&gt; then click the &lt;span style=&quot; font-weight:600;&quot;&gt;Roster Tab&lt;/span&gt; of your fleet and click the &lt;span style=&quot; font-weight:600;&quot;&gt;Export Button&lt;/span&gt; in the bottom left corner of the window. Once you have done this for all your fleets click the button below.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../nexus.qrc"/>
+ </resources>
+ <connections/>
+</ui>

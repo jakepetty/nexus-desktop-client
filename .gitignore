@@ -1,0 +1,6 @@
+common.h
+nexus.pro.user
+*.autosave
+AStyle.exe
+uncrustify.exe
+nexus.zip

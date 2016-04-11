@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ExistingDialog</class>
+ <widget class="QDialog" name="ExistingDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>101</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Existing Log</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../nexus.qrc">
+    <normaloff>:/images/favicon.png</normaloff>:/images/favicon.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#ExistingDialog {
+    background: #15181f;
+}
+
+* {
+    outline: 0;
+    font: 11px arial;
+}
+
+QLabel {
+    color: #ffffff;
+}
+
+QPushButton {
+    background: #2574ab;
+    border-radius: 2px;
+	padding: 3px 5px 2px;
+    border: none;
+    min-width: 100px;
+    color: #ffffff;
+}
+
+QPushButton::hover {
+    background: #2b85c4;
+}
+
+QPushButton::pressed {
+    background: #206291;
+}
+
+QPushButton:disabled {
+    background-color: #1c2029;
+    color: #46474a;
+}
+
+QProgressBar {
+    border: none;
+    border-radius: 2px;
+	text-align:center;
+    background: #323947;
+	color:#fff;
+}
+
+QProgressBar::chunk {
+    background-color: #24dba1
+}
+
+
+
+QListView {
+    outline: 0;
+    padding: 10px;
+    color: #ffffff;
+    background: #323947;
+    border: 1px solid #323947;
+    show-decoration-selected: 1; /* make the selection span the entire width of the view */
+}
+
+QListView::item {
+    height: 24px;
+}
+
+QListView::item:selected {
+    color: #ffffff;
+}
+
+QListView::item:selected:!active {
+    background: #24dba1;
+}
+
+QListView::item:selected:active {
+    background: #24dba1;
+}
+
+QListView::item:hover {
+    background: #24dba1;
+}
+
+QScrollBar:vertical {
+    border: none;
+    background: #323947;
+    width: 5px;
+    margin: 0;
+}
+
+QScrollBar:horizontal {
+    border: none;
+    background: #323947;
+    height: 5px;
+    margin: 0;
+}
+
+QScrollBar::handle:vertical {
+    background: #24dba1;
+    min-height: 20px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #24dba1;
+    min-width: 20px;
+}
+
+QScrollBar::add-line:vertical {
+    border: none;
+    background: #323947;
+    height: 20px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:horizontal {
+    border: none;
+    background: #323947;
+    width: 20px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:vertical {
+    border: none;
+    background: #323947;
+    height: 20px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:horizontal {
+    border: none;
+    background: #323947;
+    width: 20px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+    border: none;
+}
+
+QScrollBar::up-arrow:horizontal, QScrollBar::down-arrow:horizontal {
+    border: none;
+}
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+    background: none;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p style=&quot;line-height:20px&quot;&gt;An existing combat log has been detected that has not been processed yet. Would you like to parse this log now?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item alignment="Qt::AlignBottom">
+    <widget class="QFrame" name="frame">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="text">
+         <string>Parse</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../nexus.qrc">
+          <normaloff>:/images/upload.png</normaloff>:/images/upload.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>Discard</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../nexus.qrc">
+          <normaloff>:/images/delete.png</normaloff>:/images/delete.png</iconset>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../nexus.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>HandlesDialog</class>
+ <widget class="QDialog" name="HandlesDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>320</width>
+    <height>403</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>320</width>
+    <height>403</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>320</width>
+    <height>403</height>
+   </size>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::ClickFocus</enum>
+  </property>
+  <property name="windowTitle">
+   <string>Handle Selection</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../nexus.qrc">
+    <normaloff>:/images/favicon.png</normaloff>:/images/favicon.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#HandlesDialog {
+    background: #15181f;
+}
+
+* {
+    outline: 0;
+    font: 11px arial;
+}
+
+QLabel {
+    color: #ffffff;
+}
+
+QProgressBar {
+    border: none;
+    border-radius: 2px;
+	text-align:center;
+    background: #323947;
+	color:#fff;
+}
+
+QProgressBar::chunk {
+    background-color: #24dba1
+}
+
+QPushButton {
+    background: #2574ab;
+    border-radius: 2px;
+	padding: 3px 5px 2px;
+    border: none;
+	min-width:100px;
+    color: #ffffff;
+}
+
+QPushButton::hover {
+    background: #2b85c4;
+}
+
+QPushButton::pressed {
+    background: #206291;
+}
+
+QPushButton:disabled {
+    background-color: #1c2029;
+    color: #46474a;
+}
+QListView {
+    outline: 0;
+    color: #ffffff;
+    background: transparent;
+    border: 1px solid #323947;
+	border-radius:2px;
+	padding:10px;
+    show-decoration-selected: 1; /* make the selection span the entire width of the view */
+}
+
+QListView::item {
+	padding:10px 12px 9px;
+	margin-right:10px;
+	border-radius:2px
+}
+
+QListView::item:selected {
+    color: #fff;
+}
+
+QListView::item:selected:!active {
+    background: #373f52;
+}
+
+QListView::item:selected:active {
+    background: #262c38;
+}
+
+QListView::item:hover {
+    background: #262c38;
+}
+
+QScrollBar {
+    border: none;
+    background: #20252e;
+	border-radius:2px;
+    width: 5px;
+    margin: 0;
+}
+
+QScrollBar::handle {
+    background: rgba(255,255,255,0.1);
+    min-height: 20px;
+	border-radius:2px;
+}
+
+QScrollBar::handle:hover {
+    background: rgba(36,219,161,1);
+    min-height: 20px;
+	border-radius:2px;
+}
+
+QScrollBar::sub-line, QScrollBar::add-line{
+    subcontrol-origin: margin;
+    height: 20px;
+    border: none;
+    background: transparent;
+	border-radius:2px;
+}
+
+QScrollBar::up-arrow, QScrollBar::down-arrowl {
+    border: none;
+}
+
+QScrollBar::add-page, QScrollBar::sub-page {
+    background: none;
+}</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="spacing">
+      <number>5</number>
+     </property>
+     <item>
+      <widget class="QFrame" name="frame">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="styleSheet">
+           <string notr="true">border: 1px solid #323947;
+border-radius:2px;
+padding:10px 12px 9px;
+color:#ccc</string>
+          </property>
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Here's a list of the handles we were able to detect on your computer. Select the ones you wish to bind to your account and &lt;span style=&quot; font-weight:600;color:#fff&quot;&gt;Click OK&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QFrame" name="handle_list">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QListWidget" name="listWidget">
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="whatsThis">
+           <string>A list of handles we've detected on your computer</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::ExtendedSelection</enum>
+          </property>
+          <property name="currentRow">
+           <number>-1</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QFrame" name="frame_3">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <property name="spacing">
+         <number>5</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="bind">
+          <property name="text">
+           <string>Bind</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../nexus.qrc">
+            <normaloff>:/images/link.png</normaloff>:/images/link.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>14</width>
+            <height>14</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="cancel">
+          <property name="text">
+           <string>Cancel</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../nexus.qrc">
+            <normaloff>:/images/Previous-16.png</normaloff>:/images/Previous-16.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>14</width>
+            <height>14</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../nexus.qrc"/>
+ </resources>
+ <connections/>
+</ui>
