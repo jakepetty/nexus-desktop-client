@@ -44,6 +44,7 @@ void SetupWizard::checkProcesses() {
     if(!callback.isEmpty()) {
         this->timer->stop();
         saveField(URL_EDIT_USER, "User", Acc->User["id"].toInt(),  "install_directory", callback);
+        STO->clearCombatLogs(callback);
         ui->tabWidget->setTabEnabled(0, false);
         ui->tabWidget->setTabEnabled(1, true);
         ui->tabWidget->setCurrentIndex(1);
