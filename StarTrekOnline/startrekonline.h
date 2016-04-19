@@ -248,16 +248,19 @@ public:
         // Create the backup directory if it does not exist
         QDir dir;
         if(dir.exists(backup) || dir.mkpath(backup)) {
-
-            // Load log files into a single variable
-            QByteArray data = readCombatLog(path);
-
             // Write log files into a single file
-            QFile log(backup + "Combatlog.Log." + QDateTime::currentDateTime().toString("yyyy-MM-dd_hh-mm-ss"));
-            if(log.open(QFile::WriteOnly|QFile::Text)) {
-                log.write(data);
-                log.close();
+            QFile output(backup + "Combatlog.Log." + QDateTime::currentDateTime().toString("yyyy-MM-dd_hh-mm-ss"));
+            foreach(QString file, this->combatlogs(path)) {
+                QFile input(file);
+                if(input.open(QFile::ReadOnly | QFile::Text)) {
+                    if(output.open(QFile::Append | QFile::WriteOnly | QFile::Text)) {
+                        output.write(input.readAll());
+                    }
+                    input.close();
+                    QFile::remove(file);
+                }
             }
+            output.close();
         }
 
         // Delete Log files
