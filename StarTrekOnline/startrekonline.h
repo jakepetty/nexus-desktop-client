@@ -162,8 +162,8 @@ public:
     void fileCleanup(QString path) {
         foreach(QString file, this->shutdownLogs2(path)) {
             QFile input(file);
-            if(input.open(QFile::ReadOnly)) {
-                QFile output("Shutdown.Log");
+            if(input.open(QFile::ReadOnly | QFile::Text)) {
+                QFile output(path + "Shutdown.Log");
                 if(output.open(QFile::Append | QFile::WriteOnly | QFile::Text)) {
                     output.write(input.readAll());
                     output.close();
@@ -175,8 +175,8 @@ public:
 
         foreach(QString file, this->clientservercommLogs(path)) {
             QFile input(file);
-            if(input.open(QFile::ReadOnly)) {
-                QFile output("Clientservercomm.Log");
+            if(input.open(QFile::ReadOnly | QFile::Text)) {
+                QFile output(path + "Clientservercomm.Log");
                 if(output.open(QFile::Append | QFile::WriteOnly | QFile::Text)) {
                     output.write(input.readAll());
                     output.close();
@@ -188,8 +188,8 @@ public:
 
         foreach(QString file, this->crashLogs(path)) {
             QFile input(file);
-            if(input.open(QFile::ReadOnly)) {
-                QFile output("Crash.Log");
+            if(input.open(QFile::ReadOnly | QFile::Text)) {
+                QFile output(path + "Crash.Log");
                 if(output.open(QFile::Append | QFile::WriteOnly | QFile::Text)) {
                     output.write(input.readAll());
                     output.close();
@@ -201,8 +201,8 @@ public:
 
         foreach(QString file, this->MakeshaderbinsLogs(path)) {
             QFile input(file);
-            if(input.open(QFile::ReadOnly)) {
-                QFile output("Makeshaderbins.Log");
+            if(input.open(QFile::ReadOnly | QFile::Text)) {
+                QFile output(path + "Makeshaderbins.Log");
                 if(output.open(QFile::Append | QFile::WriteOnly | QFile::Text)) {
                     output.write(input.readAll());
                     output.close();
@@ -214,8 +214,8 @@ public:
 
         foreach(QString file, this->pclLogs(path)) {
             QFile input(file);
-            if(input.open(QFile::ReadOnly)) {
-                QFile output("Pcl.Log");
+            if(input.open(QFile::ReadOnly | QFile::Text)) {
+                QFile output(path + "Pcl.Log");
                 if(output.open(QFile::Append | QFile::WriteOnly | QFile::Text)) {
                     output.write(input.readAll());
                     output.close();
@@ -227,8 +227,8 @@ public:
 
         foreach(QString file, this->voiceChatLogs(path)) {
             QFile input(file);
-            if(input.open(QFile::ReadOnly)) {
-                QFile output("Voicechat.Log");
+            if(input.open(QFile::ReadOnly | QFile::Text)) {
+                QFile output(path + "Voicechat.Log");
                 if(output.open(QFile::Append | QFile::WriteOnly | QFile::Text)) {
                     output.write(input.readAll());
                     output.close();
