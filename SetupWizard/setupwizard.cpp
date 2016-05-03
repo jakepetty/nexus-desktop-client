@@ -62,6 +62,7 @@ void SetupWizard::on_bindHandles_released()
         popup("Problem detecting handles", "Please verify your install directory is accurate if it is then please contact us with a bug report.");
     } else {
         HandlesDialog *handleDlg = new HandlesDialog(handles);
+        int success = 0;
         if(handleDlg->exec()) {
 
             QUrlQuery post;
@@ -77,17 +78,23 @@ void SetupWizard::on_bindHandles_released()
                     i++;
                 }
                 QJsonObject callback = Web->postJSON(URL_BIND_HANDLE, post);
+                if(callback["code"] == 200){
+                    success++;
+                }
                 post.clear();
             }
+            if(success > 0){
+                ui->tabWidget->setTabEnabled(1, false);
+                ui->bindHandles->setEnabled(false);
 
-            ui->tabWidget->setTabEnabled(1, false);
-            ui->bindHandles->setEnabled(false);
+                ui->tabWidget->setTabEnabled(2, true);
+                ui->selectFleets->setEnabled(true);
+                ui->skipFleets->setEnabled(true);
 
-            ui->tabWidget->setTabEnabled(2, true);
-            ui->selectFleets->setEnabled(true);
-            ui->skipFleets->setEnabled(true);
-
-            ui->tabWidget->setCurrentIndex(2);
+                ui->tabWidget->setCurrentIndex(2);
+            }else{
+                popup("Handle Binding Error", "Handling binding is required in order to proceed. If none of your handles appeared in the list, please choose a character from your character select screen in-game and after the loading screen type /quit and click Bind Handles again.");
+            }
         }
     }
 }
