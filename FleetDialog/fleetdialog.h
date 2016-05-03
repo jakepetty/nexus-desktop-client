@@ -39,6 +39,7 @@ private slots:
     void uploadProgress(qint64 bytesSent,qint64 bytesTotal);
     void uploadError(QNetworkReply::NetworkError error) {
         if(error != QNetworkReply::NoError) {
+            popup("Upload Error", "Please try again. If you're uploading multiple fleet rosters at once, try uploading them one at a time.");
             if(APP_DEBUG) {
                 qDebug() << "Upload Error: " << this->_reply->errorString();
             }

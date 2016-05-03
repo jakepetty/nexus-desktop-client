@@ -192,16 +192,16 @@ void FleetDialog::uploadFinished()
         if(APP_DEBUG) {
             qDebug() << callback;
         }
-        ui->listWidget->clearSelection();
-        this->on_listWidget_itemSelectionChanged();
-        ui->progressBar->hide();
-        ui->label_3->hide();
-        ui->label_2->hide();
     } else {
         if(APP_DEBUG) {
             qDebug() << "Upload Finished: " << this->_reply->errorString();
         }
     }
+    ui->listWidget->clearSelection();
+    this->on_listWidget_itemSelectionChanged();
+    ui->progressBar->hide();
+    ui->label_3->hide();
+    ui->label_2->hide();
 }
 QListWidgetItem* FleetDialog::getItemByFilename(QString name) {
     name = QDateTime::fromString(name, "yyyyMMdd-hhmmss").toLocalTime().toString("yyyyMMdd-hhmmss");
