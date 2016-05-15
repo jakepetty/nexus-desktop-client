@@ -54,28 +54,38 @@ public:
                         // Check if the CombatLog is valid
                         if(STO->validateCombatLog(fileData)) {
                             QStringList logHandles = STO->getLogHandles(fileData);
-                            QStringList handles = STO->getHandles(Acc->User["install_directory"].toString() + LOGS);
-                            bool handle_found = false;
-                            foreach(QString handle, logHandles) {
-                                if(handles.contains(handle)) {
-                                    handle_found = true;
-                                    break;
-                                }
-                            }
-                            // Check if the CombatLog contains the uploaders handle
-                            if(handle_found) {
-                                // Upload CombatLog
-                                if(!this->is_uploading) {
-                                    this->is_uploading = true;
+                            if(!logHandles.empty()) {
+                                QStringList handles = STO->getHandles(Acc->User["install_directory"].toString() + LOGS);
+                                if(!handles.empty()) {
+                                    bool handle_found = false;
+                                    foreach(QString handle, handles) {
+                                        if(logHandles.contains(handle)) {
+                                            handle_found = true;
+                                            break;
+                                        }
+                                    }
+                                    // Check if the CombatLog contains the uploaders handle
+                                    if(handle_found) {
+                                        // Upload CombatLog
+                                        if(!this->is_uploading) {
+                                            this->is_uploading = true;
 
-                                    // Convert log times to UTC
-                                    TimeConversionWorker *workerThread = new TimeConversionWorker(fileData);
-                                    connect(workerThread, SIGNAL(onComplete(QByteArray, QString)), SLOT(onConversionComplete(QByteArray, QString)));
-                                    connect(workerThread, SIGNAL(finished()), workerThread, SLOT(deleteLater()));
-                                    workerThread->start();
+                                            // Convert log times to UTC
+                                            TimeConversionWorker *workerThread = new TimeConversionWorker(fileData);
+                                            connect(workerThread, SIGNAL(onComplete(QByteArray, QString)), SLOT(onConversionComplete(QByteArray, QString)));
+                                            connect(workerThread, SIGNAL(finished()), workerThread, SLOT(deleteLater()));
+                                            workerThread->start();
+                                        }
+                                    } else {
+                                        this->Tray->popup("Handle Not Found...", "Unable to detect any of your handles in this combat log", QSystemTrayIcon::Warning);
+                                        this->Tray->stopAnimation();
+                                    }
+                                }else{
+                                    this->Tray->popup("Can't Build List", "Unable to build a list of your handles.", QSystemTrayIcon::Warning);
+                                    this->Tray->stopAnimation();
                                 }
                             } else {
-                                this->Tray->popup("Handle Not Found...", "Unable to detect any of your handles in this combat log", QSystemTrayIcon::Warning);
+                                this->Tray->popup("Can't Detect Handles", "Unable to detect any handles in your combat log.", QSystemTrayIcon::Warning);
                                 this->Tray->stopAnimation();
                             }
                         } else {
