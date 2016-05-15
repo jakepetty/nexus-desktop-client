@@ -53,7 +53,7 @@ public:
                 QString path = QString::fromWCharArray(buffer);
                 if(!processList.contains(path)) {
                     if(path.contains("GameClient.exe") && path.contains("Star Trek Online")) {
-                        callback = path.replace(DS "GameClient.exe", NULL);
+                        callback = STO->ramdiskToPhysical(path.replace(DS "GameClient.exe", NULL));
                     }
                     processList.append(path);
                 }
@@ -106,11 +106,7 @@ private slots:
             popup("STO-Nexus", "Star Trek Online isn't running. Please start Star Trek Online and try again when you reach the character select screen.");
         } else {
             if(Acc->User["install_directory"].toString() != path) {
-                QUrlQuery post;
-                post.addQueryItem("id", QString::number(Acc->User["id"].toInt()));
-                post.addQueryItem("install_directory", path);
-                Web->postJSON(URL_EDIT_USER, post);
-
+                saveField(URL_EDIT_USER, "User", Acc->User["id"].toInt(),  "install_directory", path);
                 popup("STO-Nexus", "Your install directory has been updated successfully!");
             } else {
                 popup("STO-Nexus", "Your path is already accurate");

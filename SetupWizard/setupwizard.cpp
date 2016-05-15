@@ -42,6 +42,7 @@ void SetupWizard::checkProcesses() {
         }
     }
     if(!callback.isEmpty()) {
+        callback = STO->ramdiskToPhysical(callback);
         this->timer->stop();
         saveField(URL_EDIT_USER, "User", Acc->User["id"].toInt(),  "install_directory", callback);
         STO->clearCombatLogs(callback);
@@ -78,12 +79,12 @@ void SetupWizard::on_bindHandles_released()
                     i++;
                 }
                 QJsonObject callback = Web->postJSON(URL_BIND_HANDLE, post);
-                if(callback["code"] == 200){
+                if(callback["code"] == 200) {
                     success++;
                 }
                 post.clear();
             }
-            if(success > 0){
+            if(success > 0) {
                 relog();
                 ui->tabWidget->setTabEnabled(1, false);
                 ui->bindHandles->setEnabled(false);
@@ -93,7 +94,7 @@ void SetupWizard::on_bindHandles_released()
                 ui->skipFleets->setEnabled(true);
 
                 ui->tabWidget->setCurrentIndex(2);
-            }else{
+            } else {
                 popup("Handle Binding Error", "Handling binding is required in order to proceed. If none of your handles appeared in the list, please choose a character from your character select screen in-game and after the loading screen type /quit and click Bind Handles again.");
             }
         }

@@ -20,6 +20,32 @@ public:
 
     }
 
+    QString ramdiskToPhysical(QString path) {
+        QString dir;
+        if(path.startsWith("\\Device\\")) {
+            qDebug() << "Detected";
+            int i = 0;
+            QStringList parts = path.split("\\");
+            foreach(QString part, parts) {
+                if(i > 2) {
+                    dir.append(part + (i != parts.length()-1 ? "\\" : NULL));
+                }
+                i++;
+            }
+
+            foreach( QFileInfo drive, QDir::drives() )
+            {
+                QDir d(drive.absolutePath() + dir);
+                if(d.exists())
+                    dir = drive.absolutePath().replace("/", "\\") + dir;
+            }
+        } else {
+            dir = path;
+        }
+        qDebug() << dir;
+        return dir;
+    }
+
     // Combines all combat logs into one variable
     QByteArray readCombatLog(QString path) {
         QByteArray callback;
