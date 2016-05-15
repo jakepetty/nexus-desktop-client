@@ -84,6 +84,7 @@ void SetupWizard::on_bindHandles_released()
                 post.clear();
             }
             if(success > 0){
+                relog();
                 ui->tabWidget->setTabEnabled(1, false);
                 ui->bindHandles->setEnabled(false);
 
