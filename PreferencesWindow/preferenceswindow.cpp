@@ -130,11 +130,10 @@ void PreferencesWindow::on_bind_handles_released()
                     post.addQueryItem(QString("data[Character][%0][name]").arg(i), character);
                     i++;
                 }
-                if(APP_DEBUG) {
-                    qDebug() << Web->postJSON(URL_BIND_HANDLE, post);
-                }
+                Web->postJSON(URL_BIND_HANDLE, post);
                 post.clear();
             }
+            relog();
             loadData();
         }
     }
