@@ -85,7 +85,6 @@ void SetupWizard::on_bindHandles_released()
                 post.clear();
             }
             if(success > 0) {
-                relog();
                 ui->tabWidget->setTabEnabled(1, false);
                 ui->bindHandles->setEnabled(false);
 
@@ -109,8 +108,6 @@ void SetupWizard::on_selectFleets_released()
     fleetManager->init();
     fleetManager->exec();
     if(fleetManager->uploadCount >= 1) {
-        saveField(URL_EDIT_USER, "User", Acc->User["id"].toInt(),  "is_setup", "1");
-
         ui->tabWidget->setTabEnabled(2, false);
         ui->selectFleets->setEnabled(false);
         ui->skipFleets->setEnabled(false);
@@ -126,7 +123,6 @@ void SetupWizard::on_selectFleets_released()
 void SetupWizard::on_skipFleets_released()
 {
     if(confirm("If you don't submit a fleet roster your characters won't have career, faction or level information this can be setup later it's just a reminder. Are you sure you want to skip this step?")) {
-        saveField(URL_EDIT_USER, "User", Acc->User["id"].toInt(),  "is_setup", "1");
 
         ui->tabWidget->setTabEnabled(2, false);
         ui->selectFleets->setEnabled(false);
@@ -141,5 +137,7 @@ void SetupWizard::on_skipFleets_released()
 
 void SetupWizard::on_continueBtn_released()
 {
+    saveField(URL_EDIT_USER, "User", Acc->User["id"].toInt(),  "is_setup", "1");
+    relog();
     this->accept();
 }
