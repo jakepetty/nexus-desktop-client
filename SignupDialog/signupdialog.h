@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include <QDate>
 #include <QLocale>
+#include <QMovie>
 #include <QStyledItemDelegate>
 #include "common.h"
 
@@ -35,7 +36,12 @@ private slots:
 
     void on_login_btn_released();
 
+    void on_send_verification_code_released();
+
+    void on_verify_released();
+
 private:
+    QString verification_code;
     QString email;
     QString password;
     Ui::SignupDialog *ui;

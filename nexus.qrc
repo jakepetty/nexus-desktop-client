@@ -50,5 +50,6 @@
         <file>images/refresh.png</file>
         <file>images/reload.png</file>
         <file>images/Previous-16.png</file>
+        <file>images/spinner2.gif</file>
     </qresource>
 </RCC>
