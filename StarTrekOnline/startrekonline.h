@@ -23,7 +23,6 @@ public:
     QString ramdiskToPhysical(QString path) {
         QString dir;
         if(path.startsWith("\\Device\\")) {
-            qDebug() << "Detected";
             int i = 0;
             QStringList parts = path.split("\\");
             foreach(QString part, parts) {
@@ -42,7 +41,6 @@ public:
         } else {
             dir = path;
         }
-        qDebug() << dir;
         return dir;
     }
 
