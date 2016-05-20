@@ -8,8 +8,9 @@ LoginDialog::LoginDialog(QWidget * parent) :
     ui->setupUi(this);
 }
 void LoginDialog::init() {
-    ui->error->setVisible(false); // Hides visiblity of the error notification
+    ui->error->hide(); // Hides visiblity of the error notification
     ui->frame->setFocus(); // Needed otherwise email gets focused removing the watermark text
+    this->resize(this->width(), this->minimumHeight());
 }
 
 LoginDialog::~LoginDialog()
@@ -19,7 +20,8 @@ LoginDialog::~LoginDialog()
 
 void LoginDialog::on_login_released()
 {
-    ui->error->setVisible(false);
+    ui->error->hide();
+    this->resize(this->width(), this->minimumHeight());
     QUrlQuery post;
     post.addQueryItem("data[User][username]", ui->username->text());
     post.addQueryItem("data[User][timezone]", getTimeZoneOffset());
@@ -44,7 +46,7 @@ void LoginDialog::on_login_released()
 
         accept();
     } else {
-        ui->error->setVisible(true);
+        ui->error->show();
     }
 }
 
