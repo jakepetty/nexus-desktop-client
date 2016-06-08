@@ -51,5 +51,6 @@
         <file>images/reload.png</file>
         <file>images/Previous-16.png</file>
         <file>images/spinner2.gif</file>
+        <file>images/donate.png</file>
     </qresource>
 </RCC>

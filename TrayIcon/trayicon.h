@@ -41,6 +41,7 @@ public:
     QAction *_actionSettings;
     QAction *_actionScreenshots;
     QAction *_actionExit;
+    QAction *_actionDonate;
     explicit TrayIcon(QObject *parent = 0) : QObject(parent) {
         HotKeyWorker *workerThread = new HotKeyWorker(Acc->DesktopSetting["hotkey"].toString(), this);
         connect(workerThread, SIGNAL(onKeyPressed()), this, SLOT(onHotkeyPress()));
@@ -135,6 +136,12 @@ public:
         this->_menu->addAction(this->_actionSettings);
         // END - Settings Action
 
+        // BEGIN - My Account Action
+        this->_actionDonate = new QAction("Make a Donation", this);
+        this->_actionDonate->setIcon(QIcon(":/images/donate.png"));
+        connect(this->_actionDonate, SIGNAL(triggered()), this, SLOT(onClickDonate()));
+        this->_menu->addAction(this->_actionDonate);
+        // END - My Account Action
         this->_menu->addSeparator();
 
         // BEGIN - Upload Action
@@ -229,6 +236,10 @@ public slots:
     }
 
 private slots:
+    void onClickDonate() {
+        QDesktopServices::openUrl(QUrl(QString(URL_DONATE)));
+    }
+
     void changeImage() {
         this->_icon->setIcon(QIcon(QString(":/images/video/icon%0.png").arg(current_image)));
         if(current_image >= 19) {
