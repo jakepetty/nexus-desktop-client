@@ -16,7 +16,9 @@ bool show_login() {
 }
 int main(int argc, char *argv[])
 {
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling); // Required for 4k scaling compatibility PLACEMENT MATTERS
     QtSingleApplication a(argc, argv);
+
     Web = new Website();
     if(!Web->isAvailable(URL_BASE)) {
         // Displays error dialog if SQL server isn't reachable
