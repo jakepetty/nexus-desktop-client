@@ -115,6 +115,26 @@ public:
         }
         return callback;
     }
+    QStringList alertLogs(QString path) {
+        QStringList callback;
+        QDir dir(path);
+        QStringList filters;
+        filters << "Alerts_*.Log";
+        foreach(QString filename, dir.entryList(filters, QDir::Files)) {
+            callback.append(dir.absoluteFilePath(filename));
+        }
+        return callback;
+    }
+    QStringList objectLogs(QString path) {
+        QStringList callback;
+        QDir dir(path);
+        QStringList filters;
+        filters << "Objectlog_*.Log";
+        foreach(QString filename, dir.entryList(filters, QDir::Files)) {
+            callback.append(dir.absoluteFilePath(filename));
+        }
+        return callback;
+    }
     QStringList pclLogs(QString path) {
         QStringList callback;
         QDir dir(path);
@@ -253,6 +273,32 @@ public:
             QFile input(file);
             if(input.open(QFile::ReadOnly | QFile::Text)) {
                 QFile output(path + "Voicechat.Log");
+                if(output.open(QFile::Append | QFile::WriteOnly | QFile::Text)) {
+                    output.write(input.readAll());
+                    output.close();
+                }
+                input.close();
+                QFile::remove(file);
+            }
+        }
+
+        foreach(QString file, this->alertLogs(path)) {
+            QFile input(file);
+            if(input.open(QFile::ReadOnly | QFile::Text)) {
+                QFile output(path + "Alerts.Log");
+                if(output.open(QFile::Append | QFile::WriteOnly | QFile::Text)) {
+                    output.write(input.readAll());
+                    output.close();
+                }
+                input.close();
+                QFile::remove(file);
+            }
+        }
+
+        foreach(QString file, this->objectLogs(path)) {
+            QFile input(file);
+            if(input.open(QFile::ReadOnly | QFile::Text)) {
+                QFile output(path + "Objectlog.Log");
                 if(output.open(QFile::Append | QFile::WriteOnly | QFile::Text)) {
                     output.write(input.readAll());
                     output.close();
