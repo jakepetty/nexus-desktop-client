@@ -1,4 +1,5 @@
 #include <QSysInfo>
+#include <QtGlobal>
 #include "SingleApplication/singleapplication.h"
 #include "LoginDialog/logindialog.h"
 #include "ExistingDialog/existingdialog.h"
@@ -16,6 +17,7 @@ bool show_login() {
 }
 int main(int argc, char *argv[])
 {
+    qputenv("QT_BEARER_POLL_TIMEOUT", QByteArray::number(-1));
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling); // Required for 4k scaling compatibility PLACEMENT MATTERS
     QtSingleApplication a(argc, argv);
 
