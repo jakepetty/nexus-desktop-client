@@ -8,6 +8,7 @@
 #include <QIcon>
 #include <QFile>
 #include <QDebug>
+#include <QTimeZone>
 #include <QSettings>
 #include <QCryptographicHash>
 #include "structs.h"
@@ -21,7 +22,7 @@ extern StarTrekOnline * STO;
 extern QSettings * settings;
 
 // App Information
-#define APP_DEBUG true // set to false for production
+#define APP_DEBUG false // set to false for production
 #define DS "\\"
 #define LOGS DS "logs" DS "GameClient" DS
 #define SCREENSHOTS DS "Screenshots" DS
@@ -38,11 +39,12 @@ extern QSettings * settings;
 #define MAX_FILE_UPLOADS 20
 
 // Strings
-#define URL_BASE "https://dev.sto-nexus.com"
+#define URL_BASE "https://sto-nexus.com"
 #define URL_LOGIN URL_BASE "/client/users/login.json"
 #define URL_SCREENSHOT URL_BASE "/client/screenshots/open/%1/%2"
 #define URL_FLEET URL_BASE "/client/fleets/open/%1/%2"
 #define URL_ADD_USER URL_BASE "/client/users/add.json"
+#define URL_EMAIL_VERIFICATION URL_BASE "/client/users/verify_email.json"
 #define URL_ADD_CHARACTER URL_BASE "/client/character_system/characters/add.json"
 #define URL_BIND_HANDLE URL_BASE "/client/character_system/handles/bind.json"
 #define URL_FIND_HANDLE URL_BASE "/client/character_system/handles/find.json"
@@ -55,11 +57,14 @@ extern QSettings * settings;
 #define URL_UPLOAD_SCREENSHOT URL_BASE "/client/screenshot_system/screenshots/add.json"
 #define URL_UPLOAD_REPORT URL_BASE "/client/report_system/reports/add.json"
 #define URL_ACCOUNT URL_BASE "/u/%1"
+#define URL_DONATE URL_BASE "/paypal/options"
 #define URL_REPORT URL_BASE "/r/%1"
+#define URL_REPORT_CHECK URL_BASE "/client/reports/check/%1.json"
+#define URL_REPORT_LOGIN URL_BASE "/client/reports/open/%1/%2"
 #define URL_CHARACTER URL_BASE "/c/%1/%2"
 #define URL_AVATAR URL_BASE "/client/users/avatar/%1/%2.json"
-#define URL_REPORT_LOGIN URL_BASE "/client/reports/open/%1/%2"
 #define URL_VERSION URL_BASE "/client/downloads/version.json"
+#define URL_SCREENSHOT_GALLERY URL_BASE "/u/%1/screenshots"
 #define SECURITY_SALT ""
 
 // Global Functions
@@ -162,12 +167,6 @@ static qint64 getFileSize(QStringList files) {
     }
     return size;
 }
-static void relog() {
-    QUrlQuery loginData;
-    loginData.addQueryItem("data[User][username]", Acc->User["username"].toString());
-    loginData.addQueryItem("data[User][password]", Acc->User["password"].toString());
-    Acc->setup(Web->postJSON(URL_LOGIN, loginData));
-}
 
 static bool saveField(QString url, QString model, int id, QString field, QJsonValue value) {
     bool callback = false;
@@ -208,6 +207,7 @@ static bool confirm(QString question) {
     box.setDefaultButton(QMessageBox::No);
     return box.exec() == QMessageBox::Yes;
 }
+
 static void popup(QString title, QString text) {
     QMessageBox box;
     box.setWindowTitle(title);
@@ -231,5 +231,19 @@ static QString ucfirst(QString str) {
         callback += word.left(1).toUpper() + word.mid(1) + " ";
     }
     return callback.trimmed();
+}
+
+static QString getTimeZoneOffset()
+{
+    QTimeZone tz;
+    return QTimeZone::systemTimeZoneId();
+}
+
+static void relog() {
+    QUrlQuery loginData;
+    loginData.addQueryItem("data[User][username]", Acc->User["username"].toString());
+    loginData.addQueryItem("data[User][password]", Acc->User["password"].toString());
+    loginData.addQueryItem("data[User][timezone]", getTimeZoneOffset());
+    Acc->setup(Web->postJSON(URL_LOGIN, loginData));
 }
 #endif //COMMON_H
