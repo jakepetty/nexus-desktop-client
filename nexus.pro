@@ -23,6 +23,7 @@ SOURCES += main.cpp \
            $$files(ScreenshotDialog/*.cpp) \
            $$files(FleetDialog/*.cpp) \
            $$files(SetupWizard/*.cpp) \
+           $$files(NotificationDialog/*.cpp) \
            $$files(ExistingDialog/*.cpp)
 
 HEADERS += app.h \
@@ -43,6 +44,7 @@ HEADERS += app.h \
            $$files(ScreenshotDialog/*.h) \
            $$files(FleetDialog/*.h) \
            $$files(SetupWizard/*.h) \
+           $$files(NotificationDialog/*.h) \
            $$files(ExistingDialog/*.h)
 
 FORMS += $$files(LoginDialog/*.ui) \
@@ -54,12 +56,13 @@ FORMS += $$files(LoginDialog/*.ui) \
          $$files(ScreenshotDialog/*.ui) \
          $$files(FleetDialog/*.ui) \
          $$files(SetupWizard/*.ui) \
+         $$files(NotificationDialog/*.ui) \
          $$files(ExistingDialog/*.ui)
 
 #RC_FILE = nexus.rc
 RESOURCES += nexus.qrc
 QMAKE_LFLAGS += /INCREMENTAL:NO
-VERSION = 1.0.0.9
+VERSION = 1.1.0.0
 DEFINES += VERSION_STR='"\\\"$$VERSION\\\""'
 QMAKE_TARGET_COMPANY = "STO-Nexus"
 QMAKE_TARGET_PRODUCT = "STO-Nexus Desktop Client"

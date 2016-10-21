@@ -4,7 +4,7 @@
 #include <QDialog>
 
 namespace Ui {
-class ExistingDialog;
+    class ExistingDialog;
 }
 
 class ExistingDialog : public QDialog
@@ -12,7 +12,7 @@ class ExistingDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ExistingDialog(QWidget *parent = 0);
+    explicit ExistingDialog( QWidget * parent = 0 );
     ~ExistingDialog();
 
 private slots:
@@ -21,7 +21,7 @@ private slots:
     void on_pushButton_released();
 
 private:
-    Ui::ExistingDialog *ui;
+    Ui::ExistingDialog * ui;
 };
 
 #endif // EXISTINGDIALOG_H

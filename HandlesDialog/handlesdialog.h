@@ -6,7 +6,7 @@
 #include <QListWidgetItem>
 
 namespace Ui {
-class HandlesDialog;
+    class HandlesDialog;
 }
 
 class HandlesDialog : public QDialog
@@ -14,7 +14,7 @@ class HandlesDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit HandlesDialog(QStringList handles, QWidget * parent = 0);
+    explicit HandlesDialog( QStringList handles, QWidget * parent = 0 );
     ~HandlesDialog();
 
     QList<QListWidgetItem *> getAllowed() {
@@ -30,7 +30,7 @@ private slots:
 
 private:
     QList<QListWidgetItem *> allowed;
-    Ui::HandlesDialog *ui;
+    Ui::HandlesDialog * ui;
 };
 
 #endif // HANDLESDIALOG_H

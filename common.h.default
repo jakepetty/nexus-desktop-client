@@ -64,16 +64,17 @@ extern QSettings * settings;
 #define URL_CHARACTER URL_BASE "/c/%1/%2"
 #define URL_AVATAR URL_BASE "/client/users/avatar/%1/%2.json"
 #define URL_VERSION URL_BASE "/client/downloads/version.json"
+#define URL_NEWS_FEED URL_BASE "/client/message_system/notifications/news.json"
 #define URL_SCREENSHOT_GALLERY URL_BASE "/u/%1/screenshots"
 #define SECURITY_SALT ""
 
 // Global Functions
 
 // Debugging Function
-static void serviceCheck(QString name, QString status) {
-    if(APP_DEBUG) {
+static void serviceCheck( QString name, QString status ) {
+    if ( APP_DEBUG ) {
         QString tabs;
-        if(name.length() > 18) {
+        if ( name.length() > 18 ) {
             tabs = "		";
         } else {
             tabs = "			";
@@ -83,152 +84,155 @@ static void serviceCheck(QString name, QString status) {
 }
 
 // Compresses combat logs for upload
-static QByteArray compress(QByteArray data) {
-    return qCompress(data, -1).remove(0, 4);
+static QByteArray compress( QByteArray data ) {
+    return qCompress( data, -1 ).remove( 0, 4 );
 }
 
 // DEPRECATED - Compresses files for archiving
-static QByteArray archive(QByteArray data) {
-    return qCompress(data, -1);
+static QByteArray archive( QByteArray data ) {
+    return qCompress( data, -1 );
 }
 
 // DEPRECATED - Decompresses Archived files
-static QByteArray decompress(QByteArray data) {
-    return qUncompress(data);
+static QByteArray decompress( QByteArray data ) {
+    return qUncompress( data );
 }
 
 // SHA-1 Encryption function
-static QString sha1(QString str) {
-    return QString(QCryptographicHash::hash(QString(SECURITY_SALT + str).toUtf8(), QCryptographicHash::Sha1).toHex());
+static QString sha1( QString str ) {
+    return QString( QCryptographicHash::hash( QString( SECURITY_SALT + str ).toUtf8(), QCryptographicHash::Sha1 ).toHex());
 }
 
 // MD5 Encryption function
-static QString md5(QString str) {
-    return QString(QCryptographicHash::hash((QString(SECURITY_SALT + str).toUtf8()),QCryptographicHash::Md5).toHex());
+static QString md5( QString str ) {
+    return QString( QCryptographicHash::hash((QString( SECURITY_SALT + str ).toUtf8()), QCryptographicHash::Md5 ).toHex());
 }
 
 // Returns current UTC MySQL Timestamp
-static QVariant NOW(bool timestamp = false) {
-    if(timestamp) {
+static QVariant NOW( bool timestamp = false ) {
+    if ( timestamp ) {
         return QDateTime::currentDateTime().toUTC().toTime_t();
     } else {
-        return QDateTime::currentDateTime().toUTC().toString("yyyy-MM-dd hh:mm:ss");
+        return QDateTime::currentDateTime().toUTC().toString( "yyyy-MM-dd hh:mm:ss" );
     }
 }
-static QString timeAgoInWords(int s) {
+static QString timeAgoInWords( int s ) {
     int days = s / 60 / 60 / 24;
     int hours = (s / 60 / 60) % 24;
     int minutes = (s / 60) % 60;
     int seconds = s % 60;
     QString d;
-    if(days > 0) {
-        d = QString("%0 day%1").arg(days).arg(days != 1 ? "s" : NULL);
+    if ( days > 0 ) {
+        d = QString( "%0 day%1" ).arg( days ).arg( days != 1 ? "s" : NULL );
     }
     QString h;
-    if(hours > 0) {
-        h = QString("%0 hour%1").arg(hours).arg(hours != 1 ? "s" : NULL);
+    if ( hours > 0 ) {
+        h = QString( "%0 hour%1" ).arg( hours ).arg( hours != 1 ? "s" : NULL );
     }
     QString m;
-    if(minutes > 0) {
-        m = QString("%0 minute%1").arg(minutes).arg(minutes != 1 ? "s" : NULL);
+    if ( minutes > 0 ) {
+        m = QString( "%0 minute%1" ).arg( minutes ).arg( minutes != 1 ? "s" : NULL );
     }
     QString se;
-    if(seconds > 0) {
-        se = QString("%0 second%1").arg(seconds).arg(seconds != 1 ? "s" : NULL);
+    if ( seconds > 0 ) {
+        se = QString( "%0 second%1" ).arg( seconds ).arg( seconds != 1 ? "s" : NULL );
     }
-    return QString("%0 %1 %2 %3").arg(d).arg(h).arg(m).arg(se).trimmed();
+    return QString( "%0 %1 %2 %3" ).arg( d ).arg( h ).arg( m ).arg( se ).trimmed();
 }
 
 // Kills specific task APP_FILENAME and APP_TEMP_FILENAME
-static void killTask(QString task) {
+static void killTask( QString task ) {
     QProcess p;
-    p.start(QString("taskkill /F /IM %1").arg(task));
+    p.start( QString( "taskkill /F /IM %1" ).arg( task ));
     p.waitForFinished();
 }
 
 // Converts bytes to a human readable size
-static QString humanFileSize(qint64 size) {
-    if(size < 1024) {
-        return QString("%1B").arg(size);
-    } else if(size < 1048576) {
-        qreal num = (size*1.0) / 1024;
-        return QString("%1KB").arg(QString::number(num, 'f', 2));
+static QString humanFileSize( qint64 size ) {
+    if ( size < 1024 ) {
+        return QString( "%1B" ).arg( size );
+    } else if ( size < 1048576 ) {
+        qreal num = (size * 1.0) / 1024;
+        return QString( "%1KB" ).arg( QString::number( num, 'f', 2 ));
     } else {
-        qreal num = (size*1.0) / 1024 / 1024;
-        return QString("%1MB").arg(QString::number(num, 'f', 2));
+        qreal num = (size * 1.0) / 1024 / 1024;
+        return QString( "%1MB" ).arg( QString::number( num, 'f', 2 ));
     }
 }
 
-static qint64 getFileSize(QStringList files) {
+static qint64 getFileSize( QStringList files ) {
     qint64 size = 0;
-    foreach(QString file, files) {
-        QFileInfo fileInfo(file);
+    foreach( QString file, files ) {
+        QFileInfo fileInfo( file );
         size += fileInfo.size();
     }
     return size;
 }
 
-static bool saveField(QString url, QString model, int id, QString field, QJsonValue value) {
+static void popup( QString title, QString text ) {
+    QMessageBox box;
+    box.setWindowTitle( title );
+    box.setWindowIcon( QIcon( ":/images/favicon.ico" ));
+    box.setText( text );
+    box.exec();
+}
+
+
+static bool saveField( QString url, QString model, int id, QString field, QJsonValue value ) {
     bool callback = false;
     QUrlQuery post;
-    post.addQueryItem("data[" + model + "][id]", QString::number(id));
-    if(value.isBool()) {
-        post.addQueryItem("data[" + model + "][" + field + "]", value.toBool() ? "1" : "0");
-    } else if(value.isDouble()) {
-        post.addQueryItem("data[" + model + "][" + field + "]", value.toVariant().toString());
-    } else if(value.isString()) {
-        post.addQueryItem("data[" + model + "][" + field + "]", value.toString());
+    post.addQueryItem( "data[" + model + "][id]", QString::number( id ));
+    if ( value.isBool()) {
+        post.addQueryItem( "data[" + model + "][" + field + "]", value.toBool() ? "1" : "0" );
+    } else if ( value.isDouble()) {
+        post.addQueryItem( "data[" + model + "][" + field + "]", value.toVariant().toString());
+    } else if ( value.isString()) {
+        post.addQueryItem( "data[" + model + "][" + field + "]", value.toString());
     }
-    QJsonObject data = Web->postJSON(url, post);
-    if(data["code"].toInt() == 200) {
-        Acc->set(model, field, value);
+    QJsonObject data = Web->postJSON( url, post );
+    if ( data["code"].toInt() == 200 ) {
+        Acc->set( model, field, value );
+    } else {
+        popup( "Data Error", "Something went wrong while saving your settings to the STO-Nexus server. Please try again. If the problem continues please contact us on our website so that we can resolve this issue." );
     }
     return callback;
 }
 static QString version() {
-    return QString(VERSION_STR);
+    return QString( VERSION_STR );
 }
 
-static QString slug(QString str, QString sep) {
-    return str.replace(QRegExp("[^a-zA-Z\\d]"), sep);
+static QString slug( QString str, QString sep ) {
+    return str.replace( QRegExp( "[^a-zA-Z\\d]" ), sep );
 }
 
-static QString strtolower(QString str) {
+static QString strtolower( QString str ) {
     return str.toLower();
 }
 
-static bool confirm(QString question) {
+static bool confirm( QString question ) {
     QMessageBox box;
-    box.setWindowTitle("Confirmation...");
-    box.setWindowIcon(QIcon(":/images/favicon.ico"));
-    box.setText(question);
-    box.setStandardButtons(QMessageBox::Yes);
-    box.addButton(QMessageBox::No);
-    box.setDefaultButton(QMessageBox::No);
+    box.setWindowTitle( "Confirmation..." );
+    box.setWindowIcon( QIcon( ":/images/favicon.ico" ));
+    box.setText( question );
+    box.setStandardButtons( QMessageBox::Yes );
+    box.addButton( QMessageBox::No );
+    box.setDefaultButton( QMessageBox::No );
     return box.exec() == QMessageBox::Yes;
 }
 
-static void popup(QString title, QString text) {
-    QMessageBox box;
-    box.setWindowTitle(title);
-    box.setWindowIcon(QIcon(":/images/favicon.ico"));
-    box.setText(text);
-    box.exec();
-}
-
-static void debug_log(QString fn, QString msg) {
-    QFile file("nexus.log");
-    if (file.open(QIODevice::Append | QIODevice::WriteOnly | QIODevice::Text)) {
-        QTextStream outStream(&file);
-        outStream << QString("%1:\t%2\t%3\n").arg(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")).arg(fn).arg(msg);
+static void debug_log( QString fn, QString msg ) {
+    QFile file( "nexus.log" );
+    if ( file.open( QIODevice::Append | QIODevice::WriteOnly | QIODevice::Text )) {
+        QTextStream outStream( &file );
+        outStream << QString( "%1:\t%2\t%3\n" ).arg( QDateTime::currentDateTime().toString( "yyyy-MM-dd hh:mm:ss" )).arg( fn ).arg( msg );
         file.close();
     }
 }
 
-static QString ucfirst(QString str) {
+static QString ucfirst( QString str ) {
     QString callback = NULL;
-    foreach(QString word, str.split(" ")) {
-        callback += word.left(1).toUpper() + word.mid(1) + " ";
+    foreach( QString word, str.split( " " )) {
+        callback += word.left( 1 ).toUpper() + word.mid( 1 ) + " ";
     }
     return callback.trimmed();
 }
@@ -241,9 +245,9 @@ static QString getTimeZoneOffset()
 
 static void relog() {
     QUrlQuery loginData;
-    loginData.addQueryItem("data[User][username]", Acc->User["username"].toString());
-    loginData.addQueryItem("data[User][password]", Acc->User["password"].toString());
-    loginData.addQueryItem("data[User][timezone]", getTimeZoneOffset());
-    Acc->setup(Web->postJSON(URL_LOGIN, loginData));
+    loginData.addQueryItem( "data[User][username]", Acc->User["username"].toString());
+    loginData.addQueryItem( "data[User][password]", Acc->User["password"].toString());
+    loginData.addQueryItem( "data[User][timezone]", getTimeZoneOffset());
+    Acc->setup( Web->postJSON( URL_LOGIN, loginData ));
 }
 #endif //COMMON_H

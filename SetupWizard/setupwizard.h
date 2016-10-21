@@ -10,7 +10,7 @@
 #include "FleetDialog/fleetdialog.h"
 
 namespace Ui {
-class SetupWizard;
+    class SetupWizard;
 }
 
 class SetupWizard : public QDialog
@@ -18,7 +18,7 @@ class SetupWizard : public QDialog
     Q_OBJECT
 
 public:
-    explicit SetupWizard(QWidget *parent = 0);
+    explicit SetupWizard( QWidget * parent = 0 );
     void init();
     ~SetupWizard();
 private slots:
@@ -34,7 +34,7 @@ private slots:
 
 private:
     QTimer * timer;
-    Ui::SetupWizard *ui;
+    Ui::SetupWizard * ui;
 };
 
 #endif // SETUPWIZARD_H

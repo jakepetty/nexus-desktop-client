@@ -10,7 +10,7 @@
 #include "common.h"
 
 namespace Ui {
-class SignupDialog;
+    class SignupDialog;
 }
 
 class SignupDialog : public QDialog
@@ -19,7 +19,7 @@ class SignupDialog : public QDialog
 
 public:
 
-    explicit SignupDialog(QWidget *parent = 0);
+    explicit SignupDialog( QWidget * parent = 0 );
     ~SignupDialog();
 
     QString getPassword() {
@@ -44,7 +44,7 @@ private:
     QString verification_code;
     QString email;
     QString password;
-    Ui::SignupDialog *ui;
+    Ui::SignupDialog * ui;
 };
 
 #endif // SIGNUPDIALOG_H

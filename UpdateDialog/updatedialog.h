@@ -11,7 +11,7 @@
 #include <QMessageBox>
 
 namespace Ui {
-class UpdateDialog;
+    class UpdateDialog;
 }
 
 class UpdateDialog : public QWidget
@@ -19,25 +19,25 @@ class UpdateDialog : public QWidget
     Q_OBJECT
 
 public:
-    explicit UpdateDialog(QWidget *parent = 0);
-    void setTrayIcon(QSystemTrayIcon *);
-    void start(QUrl);
+    explicit UpdateDialog( QWidget * parent = 0 );
+    void setTrayIcon( QSystemTrayIcon * );
+    void start( QUrl );
     ~UpdateDialog();
 private slots:
 
-    void downloadProgress(qint64, qint64);
+    void downloadProgress( qint64, qint64 );
 
-    void downloadError(QNetworkReply::NetworkError);
+    void downloadError( QNetworkReply::NetworkError );
 
     void downloadFinished();
 
 private:
     QNetworkRequest _request;
-    QNetworkAccessManager *_manager;
-    QNetworkReply *_reply;
-    QSystemTrayIcon *_trayIcon;
+    QNetworkAccessManager * _manager;
+    QNetworkReply * _reply;
+    QSystemTrayIcon * _trayIcon;
     QUrl _downloadUrl;
-    Ui::UpdateDialog *ui;
+    Ui::UpdateDialog * ui;
 };
 
 #endif // UPDATEDIALOG_H

@@ -12,23 +12,19 @@ class StarTrekOnline : public QObject
     Q_OBJECT
 
 public:
-    explicit StarTrekOnline(QObject * parent = 0) : QObject(parent) {
+    explicit StarTrekOnline( QObject * parent = 0 ) : QObject( parent ) {}
 
-    }
+    ~StarTrekOnline() {}
 
-    ~StarTrekOnline() {
-
-    }
-
-    QMap<QString, QString> patchInfo(QString path){
-        QFile file(path + "patch_trivia.txt");
+    QMap<QString, QString> patchInfo( QString path ){
+        QFile file( path + "patch_trivia.txt" );
         QMap<QString, QString> fileinfo;
-        if(file.open(QFile::ReadOnly)) {
-            QStringList lines = QString(file.readAll()).trimmed().split("\n");
+        if ( file.open( QFile::ReadOnly )) {
+            QStringList lines = QString( file.readAll()).trimmed().split( "\n" );
             int i = 0;
-            foreach(QString line, lines) {
-                line = line.trimmed().replace("Trivia ", "");
-                fileinfo[line.mid(0, line.indexOf(' '))] = line.mid(line.indexOf(' ')+1).replace("\"", "");
+            foreach( QString line, lines ) {
+                line = line.trimmed().replace( "Trivia ", "" );
+                fileinfo[line.mid( 0, line.indexOf( ' ' ))] = line.mid( line.indexOf( ' ' ) + 1 ).replace( "\"", "" );
                 i++;
             }
             file.close();
@@ -36,23 +32,23 @@ public:
         return fileinfo;
     }
 
-    QString ramdiskToPhysical(QString path) {
+    QString ramdiskToPhysical( QString path ) {
         QString dir;
-        if(path.startsWith("\\Device\\")) {
+        if ( path.startsWith( "\\Device\\" )) {
             int i = 0;
-            QStringList parts = path.split("\\");
-            foreach(QString part, parts) {
-                if(i > 2) {
-                    dir.append(part + (i != parts.length()-1 ? "\\" : NULL));
+            QStringList parts = path.split( "\\" );
+            foreach( QString part, parts ) {
+                if ( i > 2 ) {
+                    dir.append( part + (i != parts.length() - 1 ? "\\" : NULL));
                 }
                 i++;
             }
 
             foreach( QFileInfo drive, QDir::drives() )
             {
-                QDir d(drive.absolutePath() + dir);
-                if(d.exists())
-                    dir = drive.absolutePath().replace("/", "\\") + dir;
+                QDir d( drive.absolutePath() + dir );
+                if ( d.exists())
+                    dir = drive.absolutePath().replace( "/", "\\" ) + dir;
             }
         } else {
             dir = path;
@@ -61,12 +57,12 @@ public:
     }
 
     // Combines all combat logs into one variable
-    QByteArray readCombatLog(QString path) {
+    QByteArray readCombatLog( QString path ) {
         QByteArray callback;
-        foreach(QString file, this->combatlogs(path)) {
-            QFile combatLog(file);
-            if(combatLog.open(QFile::ReadOnly)) {
-                callback.append(combatLog.readAll());
+        foreach( QString file, this->combatlogs( path )) {
+            QFile combatLog( file );
+            if ( combatLog.open( QFile::ReadOnly )) {
+                callback.append( combatLog.readAll());
                 combatLog.close();
             }
         }
@@ -74,12 +70,12 @@ public:
     }
 
     // Combines all shutdown logs into one variable
-    QByteArray readShutdownLog(QString path) {
+    QByteArray readShutdownLog( QString path ) {
         QByteArray callback;
-        foreach(QString file, this->shutdownlogs(path)) {
-            QFile shutdownLog(file);
-            if(shutdownLog.open(QFile::ReadOnly)) {
-                callback.append(shutdownLog.readAll());
+        foreach( QString file, this->shutdownlogs( path )) {
+            QFile shutdownLog( file );
+            if ( shutdownLog.open( QFile::ReadOnly )) {
+                callback.append( shutdownLog.readAll());
                 shutdownLog.close();
             }
         }
@@ -87,312 +83,312 @@ public:
     }
 
     // Returns a list of combat logs in the logs directory
-    QStringList combatlogs(QString path) {
+    QStringList combatlogs( QString path ) {
         QStringList callback;
-        QDir dir(path);
+        QDir dir( path );
         QStringList filters;
         filters << "Combatlog*.Log";
-        foreach(QString filename, dir.entryList(filters, QDir::Files)) {
-            callback.append(dir.absoluteFilePath(filename));
+        foreach( QString filename, dir.entryList( filters, QDir::Files )) {
+            callback.append( dir.absoluteFilePath( filename ));
         }
         return callback;
     }
 
     // Returns a list of shutdown logs in the logs directory
-    QStringList shutdownlogs(QString path) {
+    QStringList shutdownlogs( QString path ) {
         QStringList callback;
-        QDir dir(path);
+        QDir dir( path );
         QStringList filters;
         filters << "Shutdown*.Log";
-        foreach(QString filename, dir.entryList(filters, QDir::Files)) {
-            callback.append(dir.absoluteFilePath(filename));
+        foreach( QString filename, dir.entryList( filters, QDir::Files )) {
+            callback.append( dir.absoluteFilePath( filename ));
         }
         return callback;
     }
 
-    QStringList shutdownLogs2(QString path) {
+    QStringList shutdownLogs2( QString path ) {
         QStringList callback;
-        QDir dir(path);
+        QDir dir( path );
         QStringList filters;
         filters << "Shutdown_*.Log";
-        foreach(QString filename, dir.entryList(filters, QDir::Files)) {
-            callback.append(dir.absoluteFilePath(filename));
+        foreach( QString filename, dir.entryList( filters, QDir::Files )) {
+            callback.append( dir.absoluteFilePath( filename ));
         }
         return callback;
     }
 
-    QStringList voiceChatLogs(QString path) {
+    QStringList voiceChatLogs( QString path ) {
         QStringList callback;
-        QDir dir(path);
+        QDir dir( path );
         QStringList filters;
         filters << "Voicechat_*.Log";
-        foreach(QString filename, dir.entryList(filters, QDir::Files)) {
-            callback.append(dir.absoluteFilePath(filename));
+        foreach( QString filename, dir.entryList( filters, QDir::Files )) {
+            callback.append( dir.absoluteFilePath( filename ));
         }
         return callback;
     }
 
-    QStringList vivoxLogs(QString path) {
+    QStringList vivoxLogs( QString path ) {
         QStringList callback;
-        QDir dir(path);
+        QDir dir( path );
         QStringList filters;
         filters << "Vivox_*.Log";
-        foreach(QString filename, dir.entryList(filters, QDir::Files)) {
-            callback.append(dir.absoluteFilePath(filename));
+        foreach( QString filename, dir.entryList( filters, QDir::Files )) {
+            callback.append( dir.absoluteFilePath( filename ));
         }
         return callback;
     }
 
-    QStringList alertLogs(QString path) {
+    QStringList alertLogs( QString path ) {
         QStringList callback;
-        QDir dir(path);
+        QDir dir( path );
         QStringList filters;
         filters << "Alerts_*.Log";
-        foreach(QString filename, dir.entryList(filters, QDir::Files)) {
-            callback.append(dir.absoluteFilePath(filename));
+        foreach( QString filename, dir.entryList( filters, QDir::Files )) {
+            callback.append( dir.absoluteFilePath( filename ));
         }
         return callback;
     }
-    QStringList objectLogs(QString path) {
+    QStringList objectLogs( QString path ) {
         QStringList callback;
-        QDir dir(path);
+        QDir dir( path );
         QStringList filters;
         filters << "Objectlog_*.Log";
-        foreach(QString filename, dir.entryList(filters, QDir::Files)) {
-            callback.append(dir.absoluteFilePath(filename));
+        foreach( QString filename, dir.entryList( filters, QDir::Files )) {
+            callback.append( dir.absoluteFilePath( filename ));
         }
         return callback;
     }
-    QStringList pclLogs(QString path) {
+    QStringList pclLogs( QString path ) {
         QStringList callback;
-        QDir dir(path);
+        QDir dir( path );
         QStringList filters;
         filters << "Pcl_*.Log";
-        foreach(QString filename, dir.entryList(filters, QDir::Files)) {
-            callback.append(dir.absoluteFilePath(filename));
+        foreach( QString filename, dir.entryList( filters, QDir::Files )) {
+            callback.append( dir.absoluteFilePath( filename ));
         }
         return callback;
     }
 
-    QStringList MakeshaderbinsLogs(QString path) {
+    QStringList MakeshaderbinsLogs( QString path ) {
         QStringList callback;
-        QDir dir(path);
+        QDir dir( path );
         QStringList filters;
         filters << "Makeshaderbins_*.Log";
-        foreach(QString filename, dir.entryList(filters, QDir::Files)) {
-            callback.append(dir.absoluteFilePath(filename));
+        foreach( QString filename, dir.entryList( filters, QDir::Files )) {
+            callback.append( dir.absoluteFilePath( filename ));
         }
         return callback;
     }
 
-    QStringList crashLogs(QString path) {
+    QStringList crashLogs( QString path ) {
         QStringList callback;
-        QDir dir(path);
+        QDir dir( path );
         QStringList filters;
         filters << "Crash_*.Log";
-        foreach(QString filename, dir.entryList(filters, QDir::Files)) {
-            callback.append(dir.absoluteFilePath(filename));
+        foreach( QString filename, dir.entryList( filters, QDir::Files )) {
+            callback.append( dir.absoluteFilePath( filename ));
         }
         return callback;
     }
 
-    QStringList clientservercommLogs(QString path) {
+    QStringList clientservercommLogs( QString path ) {
         QStringList callback;
-        QDir dir(path);
+        QDir dir( path );
         QStringList filters;
         filters << "Clientservercomm_*.Log";
-        foreach(QString filename, dir.entryList(filters, QDir::Files)) {
-            callback.append(dir.absoluteFilePath(filename));
+        foreach( QString filename, dir.entryList( filters, QDir::Files )) {
+            callback.append( dir.absoluteFilePath( filename ));
         }
         return callback;
     }
 
     // Checks if the combat log is formatted properly
-    bool validateCombatLog(QByteArray data) {
+    bool validateCombatLog( QByteArray data ) {
         bool callback;
-        QStringList lines = QString(data).trimmed().split('\n');
-        QStringList parts = lines.first().split(',');
-        if(parts.count() == 12) {
-            callback = parts.first().contains("::");
+        QStringList lines = QString( data ).trimmed().split( '\n' );
+        QStringList parts = lines.first().split( ',' );
+        if ( parts.count() == 12 ) {
+            callback = parts.first().contains( "::" );
         }
         return callback;
     }
 
     // Finds users handle in combat log
-    QStringList getLogHandles(QByteArray data) {
+    QStringList getLogHandles( QByteArray data ) {
         QStringList callback;
-        QStringList lines = QString(data).trimmed().split('\n');
-        foreach(QString line, lines) {
-            CombatLogItem row(line);
-            if(!callback.contains(row.handle)) {
-                callback.append(row.handle);
+        QStringList lines = QString( data ).trimmed().split( '\n' );
+        foreach( QString line, lines ) {
+            CombatLogItem row( line );
+            if ( !callback.contains( row.handle )) {
+                callback.append( row.handle );
             }
         }
         return callback;
     }
 
-    void fileCleanup(QString path) {
-        foreach(QString file, this->shutdownLogs2(path)) {
-            QFile input(file);
-            if(input.open(QFile::ReadOnly | QFile::Text)) {
-                QFile output(path + "Shutdown.Log");
-                if(output.open(QFile::Append | QFile::WriteOnly | QFile::Text)) {
-                    output.write(input.readAll());
+    void fileCleanup( QString path ) {
+        foreach( QString file, this->shutdownLogs2( path )) {
+            QFile input( file );
+            if ( input.open( QFile::ReadOnly | QFile::Text )) {
+                QFile output( path + "Shutdown.Log" );
+                if ( output.open( QFile::Append | QFile::WriteOnly | QFile::Text )) {
+                    output.write( input.readAll());
                     output.close();
                 }
                 input.close();
-                QFile::remove(file);
+                QFile::remove( file );
             }
         }
 
-        foreach(QString file, this->clientservercommLogs(path)) {
-            QFile input(file);
-            if(input.open(QFile::ReadOnly | QFile::Text)) {
-                QFile output(path + "Clientservercomm.Log");
-                if(output.open(QFile::Append | QFile::WriteOnly | QFile::Text)) {
-                    output.write(input.readAll());
+        foreach( QString file, this->clientservercommLogs( path )) {
+            QFile input( file );
+            if ( input.open( QFile::ReadOnly | QFile::Text )) {
+                QFile output( path + "Clientservercomm.Log" );
+                if ( output.open( QFile::Append | QFile::WriteOnly | QFile::Text )) {
+                    output.write( input.readAll());
                     output.close();
                 }
                 input.close();
-                QFile::remove(file);
+                QFile::remove( file );
             }
         }
 
-        foreach(QString file, this->crashLogs(path)) {
-            QFile input(file);
-            if(input.open(QFile::ReadOnly | QFile::Text)) {
-                QFile output(path + "Crash.Log");
-                if(output.open(QFile::Append | QFile::WriteOnly | QFile::Text)) {
-                    output.write(input.readAll());
+        foreach( QString file, this->crashLogs( path )) {
+            QFile input( file );
+            if ( input.open( QFile::ReadOnly | QFile::Text )) {
+                QFile output( path + "Crash.Log" );
+                if ( output.open( QFile::Append | QFile::WriteOnly | QFile::Text )) {
+                    output.write( input.readAll());
                     output.close();
                 }
                 input.close();
-                QFile::remove(file);
+                QFile::remove( file );
             }
         }
 
-        foreach(QString file, this->MakeshaderbinsLogs(path)) {
-            QFile input(file);
-            if(input.open(QFile::ReadOnly | QFile::Text)) {
-                QFile output(path + "Makeshaderbins.Log");
-                if(output.open(QFile::Append | QFile::WriteOnly | QFile::Text)) {
-                    output.write(input.readAll());
+        foreach( QString file, this->MakeshaderbinsLogs( path )) {
+            QFile input( file );
+            if ( input.open( QFile::ReadOnly | QFile::Text )) {
+                QFile output( path + "Makeshaderbins.Log" );
+                if ( output.open( QFile::Append | QFile::WriteOnly | QFile::Text )) {
+                    output.write( input.readAll());
                     output.close();
                 }
                 input.close();
-                QFile::remove(file);
+                QFile::remove( file );
             }
         }
 
-        foreach(QString file, this->pclLogs(path)) {
-            QFile input(file);
-            if(input.open(QFile::ReadOnly | QFile::Text)) {
-                QFile output(path + "Pcl.Log");
-                if(output.open(QFile::Append | QFile::WriteOnly | QFile::Text)) {
-                    output.write(input.readAll());
+        foreach( QString file, this->pclLogs( path )) {
+            QFile input( file );
+            if ( input.open( QFile::ReadOnly | QFile::Text )) {
+                QFile output( path + "Pcl.Log" );
+                if ( output.open( QFile::Append | QFile::WriteOnly | QFile::Text )) {
+                    output.write( input.readAll());
                     output.close();
                 }
                 input.close();
-                QFile::remove(file);
+                QFile::remove( file );
             }
         }
 
-        foreach(QString file, this->voiceChatLogs(path)) {
-            QFile input(file);
-            if(input.open(QFile::ReadOnly | QFile::Text)) {
-                QFile output(path + "Voicechat.Log");
-                if(output.open(QFile::Append | QFile::WriteOnly | QFile::Text)) {
-                    output.write(input.readAll());
+        foreach( QString file, this->voiceChatLogs( path )) {
+            QFile input( file );
+            if ( input.open( QFile::ReadOnly | QFile::Text )) {
+                QFile output( path + "Voicechat.Log" );
+                if ( output.open( QFile::Append | QFile::WriteOnly | QFile::Text )) {
+                    output.write( input.readAll());
                     output.close();
                 }
                 input.close();
-                QFile::remove(file);
+                QFile::remove( file );
             }
         }
 
-        foreach(QString file, this->alertLogs(path)) {
-            QFile input(file);
-            if(input.open(QFile::ReadOnly | QFile::Text)) {
-                QFile output(path + "Alerts.Log");
-                if(output.open(QFile::Append | QFile::WriteOnly | QFile::Text)) {
-                    output.write(input.readAll());
+        foreach( QString file, this->alertLogs( path )) {
+            QFile input( file );
+            if ( input.open( QFile::ReadOnly | QFile::Text )) {
+                QFile output( path + "Alerts.Log" );
+                if ( output.open( QFile::Append | QFile::WriteOnly | QFile::Text )) {
+                    output.write( input.readAll());
                     output.close();
                 }
                 input.close();
-                QFile::remove(file);
+                QFile::remove( file );
             }
         }
 
-        foreach(QString file, this->objectLogs(path)) {
-            QFile input(file);
-            if(input.open(QFile::ReadOnly | QFile::Text)) {
-                QFile output(path + "Objectlog.Log");
-                if(output.open(QFile::Append | QFile::WriteOnly | QFile::Text)) {
-                    output.write(input.readAll());
+        foreach( QString file, this->objectLogs( path )) {
+            QFile input( file );
+            if ( input.open( QFile::ReadOnly | QFile::Text )) {
+                QFile output( path + "Objectlog.Log" );
+                if ( output.open( QFile::Append | QFile::WriteOnly | QFile::Text )) {
+                    output.write( input.readAll());
                     output.close();
                 }
                 input.close();
-                QFile::remove(file);
+                QFile::remove( file );
             }
         }
 
-        foreach(QString file, this->vivoxLogs(path)) {
-            QFile input(file);
-            if(input.open(QFile::ReadOnly | QFile::Text)) {
-                QFile output(path + "Vivox.Log");
-                if(output.open(QFile::Append | QFile::WriteOnly | QFile::Text)) {
-                    output.write(input.readAll());
+        foreach( QString file, this->vivoxLogs( path )) {
+            QFile input( file );
+            if ( input.open( QFile::ReadOnly | QFile::Text )) {
+                QFile output( path + "Vivox.Log" );
+                if ( output.open( QFile::Append | QFile::WriteOnly | QFile::Text )) {
+                    output.write( input.readAll());
                     output.close();
                 }
                 input.close();
-                QFile::remove(file);
+                QFile::remove( file );
             }
         }
     }
 
     // Deletes combat logs
-    void clearCombatLogs(QString path) {
+    void clearCombatLogs( QString path ) {
 
         // Define backup directory
         QString backup = path + "Nexus Backups/";
 
         // Create the backup directory if it does not exist
         QDir dir;
-        if(dir.exists(backup) || dir.mkpath(backup)) {
+        if ( dir.exists( backup ) || dir.mkpath( backup )) {
             // Write log files into a single file
-            QFile output(backup + "Combatlog.Log." + QDateTime::currentDateTime().toString("yyyy-MM-dd_hh-mm-ss"));
-            foreach(QString file, this->combatlogs(path)) {
-                QFile input(file);
-                if(input.open(QFile::ReadOnly | QFile::Text)) {
-                    if(output.open(QFile::Append | QFile::WriteOnly | QFile::Text)) {
-                        output.write(input.readAll());
+            QFile output( backup + "Combatlog.Log." + QDateTime::currentDateTime().toString( "yyyy-MM-dd_hh-mm-ss" ));
+            foreach( QString file, this->combatlogs( path )) {
+                QFile input( file );
+                if ( input.open( QFile::ReadOnly | QFile::Text )) {
+                    if ( output.open( QFile::Append | QFile::WriteOnly | QFile::Text )) {
+                        output.write( input.readAll());
                     }
                     input.close();
-                    QFile::remove(file);
+                    QFile::remove( file );
                 }
             }
             output.close();
         }
 
         // Delete Log files
-        this->resetCombatLogs(path);
+        this->resetCombatLogs( path );
     }
 
-    void resetCombatLogs(QString path) {
+    void resetCombatLogs( QString path ) {
         // Delete Log files
-        foreach(QString file, this->combatlogs(path)) {
-            QFile::remove(file);
+        foreach( QString file, this->combatlogs( path )) {
+            QFile::remove( file );
         }
     }
 
     // Processes shutdown log for characters and handles
-    QStringList parseShutdownLog(QString path = NULL) {
+    QStringList parseShutdownLog( QString path = NULL ) {
         QStringList rows;
-        if(!path.isEmpty()) {
-            QStringList lines = QString(this->readShutdownLog(path)).trimmed().split('\n');
-            foreach(QString line, lines) {
-                if(line.contains("Client[0 P[")) {
-                    rows.append(line.trimmed());
+        if ( !path.isEmpty()) {
+            QStringList lines = QString( this->readShutdownLog( path )).trimmed().split( '\n' );
+            foreach( QString line, lines ) {
+                if ( line.contains( "Client[0 P[" )) {
+                    rows.append( line.trimmed());
                 }
             }
         }
@@ -400,18 +396,18 @@ public:
     }
 
     // Retreives a list of handles found in shutdown logs
-    QStringList getHandles(QString path = NULL) {
+    QStringList getHandles( QString path = NULL ) {
         QStringList handles;
-        foreach(QString line, this->parseShutdownLog(path)) {
-            if(line.contains("Client[0 P[")) {
+        foreach( QString line, this->parseShutdownLog( path )) {
+            if ( line.contains( "Client[0 P[" )) {
                 line = line.trimmed();
-                QString first = line.split("Client[0 P[").last();
-                QString last = first.split("]]:").first();
-                QString ignore = last.split(' ').first();
-                QString data = last.replace(ignore, NULL).trimmed();
-                QString handle = data.split('@').last();
-                if(!handles.contains(handle)) {
-                    handles.append(handle);
+                QString first = line.split( "Client[0 P[" ).last();
+                QString last = first.split( "]]:" ).first();
+                QString ignore = last.split( ' ' ).first();
+                QString data = last.replace( ignore, NULL ).trimmed();
+                QString handle = data.split( '@' ).last();
+                if ( !handles.contains( handle )) {
+                    handles.append( handle );
                 }
             }
         }
@@ -419,19 +415,19 @@ public:
     }
 
     // Retreives a list of characters associated with a specific handle found in shutdown logs
-    QStringList getCharactersByHandle(QString path = NULL, QString find = NULL) {
+    QStringList getCharactersByHandle( QString path = NULL, QString find = NULL ) {
         QStringList characters;
-        foreach(QString line, this->parseShutdownLog(path)) {
-            if(line.contains("Client[0 P[")) {
+        foreach( QString line, this->parseShutdownLog( path )) {
+            if ( line.contains( "Client[0 P[" )) {
                 line = line.trimmed();
-                QString first = line.split("Client[0 P[").last();
-                QString last = first.split("]]:").first();
-                QString ignore = last.split(' ').first();
-                QString data = last.replace(ignore, NULL).trimmed();
-                QString character = data.split('@').first();
-                QString handle = data.split('@').last();
-                if(!characters.contains(character) && handle == find) {
-                    characters.append(character);
+                QString first = line.split( "Client[0 P[" ).last();
+                QString last = first.split( "]]:" ).first();
+                QString ignore = last.split( ' ' ).first();
+                QString data = last.replace( ignore, NULL ).trimmed();
+                QString character = data.split( '@' ).first();
+                QString handle = data.split( '@' ).last();
+                if ( !characters.contains( character ) && handle == find ) {
+                    characters.append( character );
                 }
             }
         }

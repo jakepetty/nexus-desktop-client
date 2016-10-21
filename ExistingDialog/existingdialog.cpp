@@ -1,11 +1,11 @@
 #include "existingdialog.h"
 #include "ui_existingdialog.h"
 
-ExistingDialog::ExistingDialog(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::ExistingDialog)
+ExistingDialog::ExistingDialog( QWidget * parent ) :
+    QDialog( parent ),
+    ui( new Ui::ExistingDialog )
 {
-    ui->setupUi(this);
+    ui->setupUi( this );
 }
 
 ExistingDialog::~ExistingDialog()

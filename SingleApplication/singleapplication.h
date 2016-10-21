@@ -6,13 +6,13 @@
 class QtSingleApplication : public QApplication
 {
 public:
-    QtSingleApplication(int &argc, char **argv);
+    QtSingleApplication( int & argc, char * * argv );
     ~QtSingleApplication();
 
     bool lock();
 
 private:
-    QSharedMemory *_singular;
+    QSharedMemory * _singular;
 };
 
 #endif // SINGLEAPPLICATION_H

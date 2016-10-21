@@ -26,7 +26,7 @@ public:
     QTimer * _notifications;
     App( QObject * parent = 0 ) : QObject( parent ) {
         this->Tray = new TrayIcon( this );
-        this->_notifications = new QTimer();
+        this->_notifications = new QTimer( this );
         this->_notifications->setInterval( 60 * 1000 );
         this->connect( this->_notifications, SIGNAL(timeout()), this, SLOT(onNotificationCheck()));
         this->_notifications->start();
@@ -217,7 +217,7 @@ public slots:
 
     void onNotificationCheck(){
         if ( Acc->DesktopSetting["allow_game_news_notifications"].toBool()) {
-            QJsonObject data = Web->getJSON( "https://sto-nexus.com/client/message_system/notifications/news.json" );
+            QJsonObject data = Web->getJSON( URL_NEWS_FEED );
             if ( !data.isEmpty()) {
                 if ( settings->value( "last_notification", NULL ).toString() != data["title"].toString()) {
                     NotificationDialog * d = new NotificationDialog();

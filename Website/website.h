@@ -14,25 +14,21 @@ class Website : public QObject
 {
     Q_OBJECT
 public:
-    explicit Website(QObject * parent = 0) : QObject(parent)
-    {
+    explicit Website( QObject * parent = 0 ) : QObject( parent )
+    {}
 
-    }
+    ~Website() {}
 
-    ~Website() {
-
-    }
-
-    bool isAvailable(QString url) {
+    bool isAvailable( QString url ) {
         bool callback = true;
         QEventLoop eventLoop;
-        QNetworkReply *_reply;
-        QObject::connect(&this->_manager, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
-        this->_request.setUrl(QUrl(url));
-        _reply = this->_manager.get(this->_request);
+        QNetworkReply * _reply;
+        QObject::connect( &this->_manager, SIGNAL(finished(QNetworkReply *)), &eventLoop, SLOT(quit()));
+        this->_request.setUrl( QUrl( url ));
+        _reply = this->_manager.get( this->_request );
 
         eventLoop.exec();
-        if (_reply->error() != QNetworkReply::NoError) {
+        if ( _reply->error() != QNetworkReply::NoError ) {
             callback = false;
         }
 
@@ -41,23 +37,23 @@ public:
 
         return callback;
     }
-    bool isLatestVersion(QString url, QString version) {
-        QJsonObject data = this->getJSON(url);
+    bool isLatestVersion( QString url, QString version ) {
+        QJsonObject data = this->getJSON( url );
         return version == data["latest"].toString();
     }
 
-    QByteArray get(QString url) {
+    QByteArray get( QString url ) {
         QByteArray callback;
         QEventLoop eventLoop;
-        QNetworkReply *_reply;
+        QNetworkReply * _reply;
 
-        QObject::connect(&this->_manager, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
-        this->_request.setUrl(url);
-        _reply = this->_manager.get(this->_request);
+        QObject::connect( &this->_manager, SIGNAL(finished(QNetworkReply *)), &eventLoop, SLOT(quit()));
+        this->_request.setUrl( url );
+        _reply = this->_manager.get( this->_request );
 
         eventLoop.exec();
 
-        if (_reply->error() == QNetworkReply::NoError) {
+        if ( _reply->error() == QNetworkReply::NoError ) {
             callback = _reply->readAll();
         } else {
             // Error
@@ -67,23 +63,23 @@ public:
         return callback;
     }
 
-    QJsonObject postJSON(QString url, QUrlQuery params = {}) {
+    QJsonObject postJSON( QString url, QUrlQuery params = {} ) {
         QJsonObject callback;
         QEventLoop eventLoop;
-        QNetworkReply *_reply;
+        QNetworkReply * _reply;
 
-        QObject::connect(&this->_manager, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
+        QObject::connect( &this->_manager, SIGNAL(finished(QNetworkReply *)), &eventLoop, SLOT(quit()));
 
-        this->_request.setRawHeader(QString("Content-Type").toUtf8(), QString("application/x-www-form-urlencoded").toUtf8());
-        this->_request.setUrl(QUrl(url));
+        this->_request.setRawHeader( QString( "Content-Type" ).toUtf8(), QString( "application/x-www-form-urlencoded" ).toUtf8());
+        this->_request.setUrl( QUrl( url ));
 
-        _reply = this->_manager.post(this->_request, params.query(QUrl::FullyEncoded).toUtf8());
+        _reply = this->_manager.post( this->_request, params.query( QUrl::FullyEncoded ).toUtf8());
 
         eventLoop.exec();
 
-        if (_reply->error() == QNetworkReply::NoError) {
+        if ( _reply->error() == QNetworkReply::NoError ) {
             QByteArray data = _reply->readAll();
-            QJsonDocument doc(QJsonDocument::fromJson(data));
+            QJsonDocument doc( QJsonDocument::fromJson( data ));
 
             callback = doc.object();
         } else {
@@ -95,23 +91,23 @@ public:
 
         return callback;
     }
-    QJsonObject getJSON(QString url) {
+    QJsonObject getJSON( QString url ) {
         QJsonObject callback;
         QEventLoop eventLoop;
-        QNetworkReply *_reply;
-        QObject::connect(&this->_manager, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
+        QNetworkReply * _reply;
+        QObject::connect( &this->_manager, SIGNAL(finished(QNetworkReply *)), &eventLoop, SLOT(quit()));
 
-        this->_request.setRawHeader(QString("Content-Type").toUtf8(), QString("application/json").toUtf8());
+        this->_request.setRawHeader( QString( "Content-Type" ).toUtf8(), QString( "application/json" ).toUtf8());
 
-        this->_request.setUrl(QUrl(url));
+        this->_request.setUrl( QUrl( url ));
 
-        _reply = this->_manager.get(this->_request);
+        _reply = this->_manager.get( this->_request );
 
         eventLoop.exec();
 
-        if (_reply->error() == QNetworkReply::NoError) {
+        if ( _reply->error() == QNetworkReply::NoError ) {
             QByteArray data = _reply->readAll();
-            QJsonDocument doc(QJsonDocument::fromJson(data));
+            QJsonDocument doc( QJsonDocument::fromJson( data ));
             callback = doc.object();
         } else {
             // Error

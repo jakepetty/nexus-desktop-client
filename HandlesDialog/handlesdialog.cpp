@@ -1,17 +1,17 @@
 #include "handlesdialog.h"
 #include "ui_handlesdialog.h"
 
-HandlesDialog::HandlesDialog(QStringList handles, QWidget * parent) :
-    QDialog(parent),
-    ui(new Ui::HandlesDialog)
+HandlesDialog::HandlesDialog( QStringList handles, QWidget * parent ) :
+    QDialog( parent ),
+    ui( new Ui::HandlesDialog )
 {
-    ui->setupUi(this);
-    this->ui->listWidget->addItems(handles);
-    for(int i = 0; i < this->ui->listWidget->count(); i++) {
-        if(Acc->checkHandle(this->ui->listWidget->item(i)->text())){
-            this->ui->listWidget->item(i)->setSelected(true);
+    ui->setupUi( this );
+    this->ui->listWidget->addItems( handles );
+    for ( int i = 0; i < this->ui->listWidget->count(); i++ ) {
+        if ( Acc->checkHandle( this->ui->listWidget->item( i )->text())) {
+            this->ui->listWidget->item( i )->setSelected( true );
         }
-        this->ui->listWidget->item(i)->setTextAlignment(Qt::AlignCenter);
+        this->ui->listWidget->item( i )->setTextAlignment( Qt::AlignCenter );
     }
 
 }
