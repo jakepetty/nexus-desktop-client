@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1023</width>
-    <height>564</height>
+    <height>648</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -19,7 +19,7 @@
   <property name="maximumSize">
    <size>
     <width>1023</width>
-    <height>564</height>
+    <height>16777215</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -713,6 +713,48 @@ QPushButton:disabled {
          <zorder>handle_container</zorder>
          <zorder>screenshot_container</zorder>
          <zorder>report_container</zorder>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="app_settings_container">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_41">
+          <item>
+           <widget class="QCheckBox" name="allow_game_news_notifications">
+            <property name="styleSheet">
+             <string notr="true">color:#fff</string>
+            </property>
+            <property name="text">
+             <string>Allow game news notifications</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="startup_reminder">
+            <property name="styleSheet">
+             <string notr="true">color:#fff</string>
+            </property>
+            <property name="text">
+             <string>Show reminder on startup</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="run_at_startup">
+            <property name="styleSheet">
+             <string notr="true">color:#fff</string>
+            </property>
+            <property name="text">
+             <string>Run at startup</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
        <item>
@@ -1531,7 +1573,7 @@ QPushButton:disabled {
                 <x>0</x>
                 <y>0</y>
                 <width>768</width>
-                <height>673</height>
+                <height>699</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_35">
