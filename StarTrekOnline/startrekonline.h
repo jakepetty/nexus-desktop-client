@@ -20,6 +20,22 @@ public:
 
     }
 
+    QMap<QString, QString> patchInfo(QString path){
+        QFile file(path + "patch_trivia.txt");
+        QMap<QString, QString> fileinfo;
+        if(file.open(QFile::ReadOnly)) {
+            QStringList lines = QString(file.readAll()).trimmed().split("\n");
+            int i = 0;
+            foreach(QString line, lines) {
+                line = line.trimmed().replace("Trivia ", "");
+                fileinfo[line.mid(0, line.indexOf(' '))] = line.mid(line.indexOf(' ')+1).replace("\"", "");
+                i++;
+            }
+            file.close();
+        }
+        return fileinfo;
+    }
+
     QString ramdiskToPhysical(QString path) {
         QString dir;
         if(path.startsWith("\\Device\\")) {
