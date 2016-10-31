@@ -62,7 +62,7 @@ FORMS += $$files(LoginDialog/*.ui) \
 #RC_FILE = nexus.rc
 RESOURCES += nexus.qrc
 QMAKE_LFLAGS += /INCREMENTAL:NO
-VERSION = 1.1.0.0
+VERSION = 1.1.0.1
 DEFINES += VERSION_STR='"\\\"$$VERSION\\\""'
 QMAKE_TARGET_COMPANY = "STO-Nexus"
 QMAKE_TARGET_PRODUCT = "STO-Nexus Desktop Client"
