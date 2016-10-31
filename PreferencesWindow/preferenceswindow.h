@@ -462,10 +462,37 @@ private slots:
     {
         if ( is_initialized ) {
             qDebug() << "Saving on_run_at_startup_toggled";
-            QSettings reg( "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat );
+            QSettings reg( "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat ); // Deprecated remove in a later build
             if ( checked ) {
-                reg.setValue( "Nexus Desktop Client", QCoreApplication::applicationFilePath().replace( '/', '\\' ));
-            } else{
+                QFile startup( "://startup.xml" );
+                if ( startup.open( QFile::ReadOnly | QFile::Text )) {
+                    QString xml( startup.readAll());
+                    xml.replace( "{FILE_PLACEHOLDER}", QFileInfo( QCoreApplication::applicationFilePath() ).fileName() );
+                    xml.replace( "{PATH_PLACEHOLDER}", QDir::toNativeSeparators( qApp->applicationDirPath()));
+                    QFile tmp( QString( "%0/nexus.xml" ).arg( QDir::tempPath()) );
+                    if ( tmp.open( QFile::WriteOnly )) {
+                        tmp.write( xml.toUtf8() );
+                        tmp.close();
+                    } else {
+                        qDebug() << "Unable to open temp file";
+                    }
+                    QProcess p;
+                    QStringList args;
+                    p.setWorkingDirectory( QString( getenv( "SYSTEMROOT" )) + "\\System32" );
+                    args << "/Create" << "/TN" << "Nexus Desktop Client" << "/XML" << QDir::toNativeSeparators( tmp.fileName());
+                    p.start( "schtasks.exe", args );
+                    p.waitForFinished( 2000 );
+                    tmp.remove();
+                } else {
+                    qDebug() << "Unable to open resource file";
+                }
+            } else {
+                QProcess p;
+                QStringList args;
+                p.setWorkingDirectory( QString( getenv( "SYSTEMROOT" )) + "\\System32" );
+                args << "/Delete" << "/TN" << "Nexus Desktop Client" << "/F";
+                p.start( "schtasks.exe", args );
+                p.waitForFinished( 2000 );
                 reg.remove( "Nexus Desktop Client" );
             }
             saveField( URL_EDIT_DESKTOPSETTING, "DesktopSetting", Acc->DesktopSetting["id"].toInt(),  "run_at_startup", checked );

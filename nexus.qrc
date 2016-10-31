@@ -52,5 +52,6 @@
         <file>images/Previous-16.png</file>
         <file>images/spinner2.gif</file>
         <file>images/donate.png</file>
+        <file>startup.xml</file>
     </qresource>
 </RCC>
