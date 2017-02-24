@@ -53,5 +53,7 @@
         <file>images/spinner2.gif</file>
         <file>images/donate.png</file>
         <file>startup.xml</file>
+        <file>images/move.png</file>
+        <file>images/close.png</file>
     </qresource>
 </RCC>

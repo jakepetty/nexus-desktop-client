@@ -49,6 +49,10 @@ RealTimeWindow::RealTimeWindow( QWidget * parent ) :
     QMainWindow( parent, Qt::Dialog | Qt::WindowStaysOnTopHint ),
     ui( new Ui::RealTimeWindow )
 {
+    setWindowFlags(
+        QWidget::windowFlags() |
+        Qt::SplashScreen |
+        Qt::WindowStaysOnTopHint );
     ui->setupUi( this );
     this->fileMonitor = new QFileSystemWatcher( this );
     this->_logCheck = new QTimer( this );
@@ -314,3 +318,29 @@ void RealTimeWindow::on_resetBtn_released()
     STO->resetCombatLogs( Acc->User["install_directory"].toString() + LOGS );
     this->resetTable();
 }
+
+void RealTimeWindow::on_closeBtn_released()
+{
+    this->close();
+}
+
+// Used for moving window
+bool RealTimeWindow::eventFilter( QObject * object, QEvent * event ){
+    if ( object == this->ui->moveHandle && event->type() == QEvent::MouseButtonPress ) {
+        QMouseEvent * ev = static_cast<QMouseEvent *>(event);
+        if ( ev->buttons() & Qt::LeftButton )
+        {
+            this->dragPos = ev->globalPos() - this->geometry().topLeft();
+        }
+    }
+
+    if ( object == this->ui->moveHandle && event->type() == QEvent::MouseMove ) {
+        QMouseEvent * ev = static_cast<QMouseEvent *>(event);
+        if ( ev->buttons() & Qt::LeftButton )
+        {
+            this->move( ev->globalPos() - dragPos );
+        }
+    }
+    return QObject::eventFilter( object, event );
+}
+
