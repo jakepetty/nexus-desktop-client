@@ -62,11 +62,11 @@ FORMS += $$files(LoginDialog/*.ui) \
 #RC_FILE = nexus.rc
 RESOURCES += nexus.qrc
 QMAKE_LFLAGS += /INCREMENTAL:NO
-VERSION = 1.1.0.2
+VERSION = 1.1.0.3
 DEFINES += VERSION_STR='"\\\"$$VERSION\\\""'
 QMAKE_TARGET_COMPANY = "STO-Nexus"
 QMAKE_TARGET_PRODUCT = "STO-Nexus Desktop Client"
 QMAKE_TARGET_DESCRIPTION = "Desktop Client for STO-Nexus"
-QMAKE_TARGET_COPYRIGHT = "Copyright 2016 STO-Nexus.com"
+QMAKE_TARGET_COPYRIGHT = "Copyright 2017 STO-Nexus.com"
 win32:RC_ICONS += "images\\favicon.ico"
 
