@@ -163,11 +163,28 @@ void FleetDialog::uploadFinished()
             foreach( QJsonValue name, json["items"].toArray()) {
                 QListWidgetItem * item = this->getItemByFilename( name.toString());
                 QString filename = item->data( Qt::UserRole ).value<QString>();
+
+                QString backup = Acc->User["install_directory"].toString() + DS + "Nexus Backups" + DS;
+
                 QFile file( Acc->User["install_directory"].toString() + DS + filename );
-                if ( !file.remove()) {
-                    popup( file.errorString(), QString( "Unabled to delete <b>%1</b>" ).arg( filename ));
-                } else {
-                    delete item;
+
+                // Create the backup directory if it does not exist
+                QDir dir;
+                if ( dir.exists( backup ) || dir.mkpath( backup )) {
+
+                    // Write log files into a single file
+                    QFile output( backup + filename );
+                    if ( file.open( QFile::ReadOnly | QFile::Text )) {
+                        if ( output.open( QFile::Append | QFile::WriteOnly | QFile::Text )) {
+                            output.write( file.readAll());
+                        }
+                        file.close();
+                        if ( !file.remove()) {
+                            popup( file.errorString(), QString( "Unabled to delete <b>%1</b>" ).arg( filename ));
+                        } else{
+                            delete item;
+                        }
+                    }
                 }
                 this->uploadCount++;
             }
