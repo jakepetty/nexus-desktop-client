@@ -35,7 +35,7 @@ void SetupWizard::checkProcesses() {
             QString path = QString::fromWCharArray( buffer );
             if ( !processList.contains( path )) {
                 if ( path.contains( "GameClient.exe" ) && path.contains( "Star Trek Online" )) {
-                    callback = path.replace( DS "GameClient.exe", NULL );
+                    callback = path.replace( DS "GameClient.exe", NULL ).replace( DS "x86", NULL );
                 }
                 processList.append( path );
             }
