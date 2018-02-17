@@ -27,7 +27,7 @@ public:
     App( QObject * parent = 0 ) : QObject( parent ) {
         this->Tray = new TrayIcon( this );
         this->_notifications = new QTimer( this );
-        this->_notifications->setInterval( 60 * 1000 );
+        this->_notifications->setInterval( 60 * 60 * 1000 );
         this->connect( this->_notifications, SIGNAL(timeout()), this, SLOT(onNotificationCheck()));
         this->_notifications->start();
         is_uploading = false;

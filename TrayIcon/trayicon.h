@@ -235,7 +235,8 @@ public slots:
 
 private slots:
     void onClickDonate() {
-        QDesktopServices::openUrl( QUrl( QString( URL_DONATE )));
+        qDebug() << QString( URL_DONATE ).arg(Acc->User["id"].toInt());
+        QDesktopServices::openUrl( QUrl( QString( URL_DONATE ).arg(Acc->User["id"].toInt())));
     }
 
     void changeImage() {
